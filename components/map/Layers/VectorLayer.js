@@ -47,7 +47,7 @@ const VectorLayer = ({ usersData }) => {
 					return feature 
 				})
 			if (feature) {
-				content.innerHTML = '<p>Hola sóc el/la ' + feature.get('name') + ' </p>';
+				content.innerHTML = '<span>Hola sóc el/la ' + feature.get('name') + ' </span>';
 				overlay.setPosition(coordinate);
 			}
 		  });

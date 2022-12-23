@@ -20,7 +20,7 @@ export default function Home() {
 
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
-  const { height } = useDimensions(containerRef);
+
 
   const handlerRadioButtonsBaseLayer = (ev) => {
       let newObj = {
@@ -70,22 +70,7 @@ export default function Home() {
                     <a href="#" id="popup-closer" className="ol-popup-closer"></a>
                     <div id="popup-content"></div>
                 </div>
-                <motion.nav
-                    className="menu"
-                    initial={false}
-                    animate={isOpen ? "open" : "closed"}
-                    custom={height}
-                    ref={containerRef} 
-                >
-                    <motion.div className="background" variants={sidebarTransition} />
-                    <NavigationItems />
-                    <MenuToggle toggle={() => toggleOpen()} />
-                    {/*<div id="menuLeft" className="bar-menu-left" onClick={() => setOpenMenuOptions(prevState => !prevState)}>
-                        <svg className="h-8 w-8"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </div>*/}            
-                </motion.nav>
+                
                 <Map 
                     selectedBaseLayer={selectedBaseLayer} 
                     selectLayers={selectLayers}
