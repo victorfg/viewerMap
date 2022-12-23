@@ -120,7 +120,7 @@ export default function Home() {
                                 selectedBaseLayer={selectedBaseLayer}
                             />
                         )}
-                       
+                        {/*<VectorLayer usersData={usersData}/>*/}
                     
                     </Layers>
                     <Controls>
