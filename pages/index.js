@@ -86,14 +86,7 @@ export default function Home() {
                         </svg>
                     </div>*/}            
                 </motion.nav>
-                <Map 
-                    selectedBaseLayer={selectedBaseLayer} 
-                    selectLayers={selectLayers}
-                    opacityLayer={opacityLayer}
-                >
-                   
-                   
-                </Map>
+                
             </div>
         </div>
       ); 
