@@ -70,11 +70,7 @@ const Map = ({selectedBaseLayer, selectLayers, opacityLayer,children }) => {
 	},[selectedBaseLayer , selectLayers.COMARQUES_LAYER , selectLayers.MUNICIPIS_LAYER])
 
 	return (
-		<MapContext.Provider value={{ map }}>
-			<div ref={mapRef} className="ol-map">
-				
-			</div>
-		</MapContext.Provider>
+		<div>TEST</div>
 	)
 }
 
