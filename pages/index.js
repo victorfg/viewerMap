@@ -91,7 +91,11 @@ export default function Home() {
                     selectLayers={selectLayers}
                     opacityLayer={opacityLayer}
                 >
+                    <Layers>
+                        
+                        <VectorLayer usersData={usersData}/>
                     
+                    </Layers>
                     <Controls>
                         <FullScreenControl />
                     </Controls>
