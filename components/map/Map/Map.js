@@ -4,11 +4,14 @@ import * as ol from "ol";
 import {get as getProjection} from 'ol/proj';
 import LayerGroup from 'ol/layer/Group';
 import { baseLayers, layers } from "../Utils/Constants";
+import { getProjection_EPSG_25831 } from '../Utils/Functions'
 
 const Map = ({selectedBaseLayer, selectLayers, opacityLayer,children }) => {
 	const mapRef = useRef();
 	const [map, setMap] = useState(null);
 	const [optionsMap, setOptionsMap] = useState(null);
+
+	getProjection_EPSG_25831();
 
 	useEffect(() => { 
 		const projection = getProjection('EPSG:25831');

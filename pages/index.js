@@ -120,12 +120,12 @@ export default function Home() {
                                 selectedBaseLayer={selectedBaseLayer}
                             />
                         )}
-                        <VectorLayer usersData={usersData}/>
+                        {/*<VectorLayer usersData={usersData}/>*/}
                     
                     </Layers>
-                    <Controls>
+                    {/*<Controls>
                         <FullScreenControl />
-                    </Controls>
+                    </Controls>*/}
                 </Map>
             </div>
         </div>
