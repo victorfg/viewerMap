@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect } from "react"
 import MapContext from "./MapContext";
 import * as ol from "ol";
 import {get as getProjection} from 'ol/proj';
