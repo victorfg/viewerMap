@@ -41,7 +41,7 @@ const Map = ({selectedBaseLayer, selectLayers, opacityLayer,children }) => {
 				}
 			}
 		});
-	},[map, opacityLayer.dom_element?.parentElement.firstElementChild.value, opacityLayer.value, optionsMap])
+	},[opacityLayer.value])
 
 	//HANDLER CHANGE LAYERS
 	useEffect(() => {
@@ -67,12 +67,12 @@ const Map = ({selectedBaseLayer, selectLayers, opacityLayer,children }) => {
 				}
 			}
 		});
-	},[selectedBaseLayer, selectLayers.COMARQUES_LAYER, selectLayers.MUNICIPIS_LAYER, map, optionsMap])
+	},[selectedBaseLayer , selectLayers.COMARQUES_LAYER , selectLayers.MUNICIPIS_LAYER])
 
 	return (
 		<MapContext.Provider value={{ map }}>
 			<div ref={mapRef} className="ol-map">
-				{children}
+				
 			</div>
 		</MapContext.Provider>
 	)
