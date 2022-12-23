@@ -36,12 +36,12 @@ const Map = ({selectedBaseLayer, selectLayers, opacityLayer,children }) => {
 					}
 				});
 			} else {	
-				if (opacityLayer.dom_element.parentElement.firstElementChild.value == layer.get('title') ){
+				if (opacityLayer.dom_element?.parentElement.firstElementChild.value == layer.get('title') ){
 					layer.setOpacity(parseFloat(opacityLayer.value));
 				}
 			}
 		});
-	},[opacityLayer.value])
+	},[map, opacityLayer.dom_element?.parentElement.firstElementChild.value, opacityLayer.value, optionsMap])
 
 	//HANDLER CHANGE LAYERS
 	useEffect(() => {
@@ -67,7 +67,7 @@ const Map = ({selectedBaseLayer, selectLayers, opacityLayer,children }) => {
 				}
 			}
 		});
-	},[selectedBaseLayer , selectLayers.COMARQUES_LAYER , selectLayers.MUNICIPIS_LAYER])
+	},[selectedBaseLayer, selectLayers.COMARQUES_LAYER, selectLayers.MUNICIPIS_LAYER, map, optionsMap])
 
 	return (
 		<MapContext.Provider value={{ map }}>

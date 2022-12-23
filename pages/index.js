@@ -86,7 +86,47 @@ export default function Home() {
                         </svg>
                     </div>*/}            
                 </motion.nav>
-                
+                <Map 
+                    selectedBaseLayer={selectedBaseLayer} 
+                    selectLayers={selectLayers}
+                    opacityLayer={opacityLayer}
+                >
+                    <Layers>
+                        {selectedBaseLayer.TOPOGRAFIC_MAP && (
+                            <BaseLayers
+                                source={topo()}
+                                title={baseLayers.TOPOGRAFIC_MAP}
+                            />
+                        )}
+                        {selectedBaseLayer.ORTOFOTOMAPA_MAP && (
+                            <BaseLayers
+                                source={orto()}
+                                title={baseLayers.ORTOFOTOMAPA_MAP}
+                            />
+                        )}
+                        
+                        {selectLayers.COMARQUES_LAYER && (
+                            <GroupLayers
+                                source={comarques()}
+                                title={layers.COMARQUES_LAYER}
+                                selectedBaseLayer={selectedBaseLayer}
+                            />
+                        )}
+    
+                        {selectLayers.MUNICIPIS_LAYER && (
+                            <GroupLayers
+                                source={municipis()}
+                                title={layers.MUNICIPIS_LAYER}
+                                selectedBaseLayer={selectedBaseLayer}
+                            />
+                        )}
+                        <VectorLayer usersData={usersData}/>
+                    
+                    </Layers>
+                    <Controls>
+                        <FullScreenControl />
+                    </Controls>
+                </Map>
             </div>
         </div>
       ); 
