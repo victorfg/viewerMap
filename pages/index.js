@@ -55,8 +55,8 @@ export default function Home() {
       }
       setOpacityLayer(newObj);
   }
-
-  return (
+  try {
+    return (
         <div className="grid-container">
             <MenuComponent 
                 selectedBaseLayer={selectedBaseLayer} 
@@ -112,7 +112,7 @@ export default function Home() {
                                 selectedBaseLayer={selectedBaseLayer}
                             />
                         )}
-
+    
                         {selectLayers.MUNICIPIS_LAYER && (
                             <GroupLayers
                                 source={municipis()}
@@ -128,6 +128,9 @@ export default function Home() {
                     </Controls>
                 </Map>
             </div>
-      </div>
-  );
+        </div>
+      ); 
+  } catch (error) {
+    console.log(error)
+  }
 }

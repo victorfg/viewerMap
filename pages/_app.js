@@ -3,11 +3,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <ErrorBoundary>
-      <Component {...pageProps} />
-    </ErrorBoundary>
-  )
+  try {
+    return (
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
+    ) 
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 class ErrorBoundary extends React.Component {
