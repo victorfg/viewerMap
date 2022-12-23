@@ -27,11 +27,12 @@ const menuItemTransition = {
       }
     },
     closed: {
-      y: 50,
+      y: 150,
       opacity: 0,
       transition: {
-        y: { stiffness: 1000 }
-      }
+        y: { stiffness: 1000,velocity: -100 }
+      },
+      zIndex:2
     }
 };
 
@@ -46,7 +47,7 @@ const navigationItemsTransitions = {
     }
 };
 
-const itemIds = [0, 1, 2, 3, 4];
+const itemIds = [0];
 
 export {
 	sidebarTransition,

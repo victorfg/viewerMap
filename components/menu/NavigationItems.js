@@ -1,26 +1,28 @@
 import { motion } from "framer-motion";
 import {navigationItemsTransitions,itemIds, menuItemTransition, menuColorsItemTransition} from '../constants'
-
-const MenuItem = ({ i }) => {
+import  MenuComponent  from "../../components/map/Menu/MenuComponent";
+const MenuItem = (props,{ i }) => {
     const style = { border: `2px solid ${menuColorsItemTransition[i]}` };
     return (
-      <motion.li
+      <motion.div
         variants={menuItemTransition}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+        //whileHover={{ scale: 1.1 }}
+        //whileTap={{ scale: 0.95 }}
       >
-        <div className="icon-placeholder" style={style} />
-        <div className="text-placeholder" style={style} />
-      </motion.li>
+        <MenuComponent {...props}/>
+      </motion.div>
     );
 };
 
-export function NavigationItems () {
+export function NavigationItems (props) {
   return (
-    <motion.ul variants={navigationItemsTransitions}>
+    <motion.div
+      className="flex justify-center mt-20 items-center" 
+      variants={navigationItemsTransitions}
+    >
       {itemIds.map(i => (
-        <MenuItem i={i} key={i} />
+        <MenuItem i={i} key={i} {...props} />
       ))}
-    </motion.ul>
+    </motion.div>
   )
 };

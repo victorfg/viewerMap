@@ -1,6 +1,6 @@
 const InputLayerSelectorAndOpacity = (props) => {
     return (
-        <>
+        <div className="form-check">
             <input 
                 type={props.type}
                 name={props.name}
@@ -12,11 +12,11 @@ const InputLayerSelectorAndOpacity = (props) => {
                 id={props.id}
                 disabled={props.disabled}>
             </input>
-            <label>{props.layerName}</label>
+            <label className="label-layer-name">{props.layerName}</label>
             <input 
                 defaultValue="1" 
                 id ="topoOpacity" 
-                className="opacity margin-left-10" 
+                className="opacity ml-5" 
                 type="range" 
                 min="0" 
                 max="1" 
@@ -24,7 +24,7 @@ const InputLayerSelectorAndOpacity = (props) => {
                 onChange={props.onChangeRange}
                 disabled={props.disabled}>  
             </input>
-         </>
+        </div>
     )
 }
 

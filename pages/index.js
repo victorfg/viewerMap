@@ -57,14 +57,14 @@ export default function HomeMap() {
   }
 
   return (
-      <div className="grid-container">
-          <MenuComponent 
+      <>
+          {/*<MenuComponent 
               selectedBaseLayer={selectedBaseLayer} 
               openMenuOptions={openMenuOptions}
               handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
               handlerCheckButtonsLayers={handlerCheckButtonsLayers}
               handlerOpacityLayer={handlerOpacityLayer}
-          />    
+          />*/}    
           <div id="map" className="map">
               {/*<div id="popup" className="ol-popup">
                   <a href="#" id="popup-closer" className="ol-popup-closer"></a>
@@ -77,8 +77,13 @@ export default function HomeMap() {
                   custom={height}
                   ref={containerRef} 
               >
-                  <motion.div className="background" variants={sidebarTransition} />
-                  <NavigationItems />
+                  <motion.div className={`background ${isOpen ? 'rounded-3xl' : ''}`} variants={sidebarTransition} />
+                  <NavigationItems 
+                    handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
+                    handlerOpacityLayer={handlerOpacityLayer}
+                    handlerCheckButtonsLayers={handlerCheckButtonsLayers}
+                    selectedBaseLayer={selectedBaseLayer}
+                  />
                   <MenuToggle toggle={() => toggleOpen()} />
                   {/*<div id="menuLeft" className="bar-menu-left" onClick={() => setOpenMenuOptions(prevState => !prevState)}>
                       <svg className="h-8 w-8"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -96,12 +101,18 @@ export default function HomeMap() {
                           <BaseLayers
                               source={topo()}
                               title={baseLayers.TOPOGRAFIC_MAP}
+                              selectLayers={selectLayers}
+                              selectedBaseLayer={selectedBaseLayer}
+                              opacityLayer={opacityLayer} 
                           />
                       )}
                       {selectedBaseLayer.ORTOFOTOMAPA_MAP && (
                           <BaseLayers
                               source={orto()}
                               title={baseLayers.ORTOFOTOMAPA_MAP}
+                              selectLayers={selectLayers}
+                              selectedBaseLayer={selectedBaseLayer}
+                              opacityLayer={opacityLayer} 
                           />
                       )}
                       
@@ -128,6 +139,6 @@ export default function HomeMap() {
                   </Controls>*/}
               </Map>
           </div>
-      </div>
+      </>
   )
 }

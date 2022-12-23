@@ -28,50 +28,6 @@ const Map = ({selectedBaseLayer, selectLayers, opacityLayer,children }) => {
 		return () => mapObject.setTarget(undefined);
 	}, []);
 
-	//HANDLER OPACITY LAYERS
-	useEffect(() => {
-		if (!map && !optionsMap) return;
-		map.getLayers().forEach(layer => {
-			if (layer instanceof LayerGroup){
-				layer.getLayers().forEach((lyr,index,array) => {
-					if (opacityLayer.dom_element.parentElement.firstElementChild.value == lyr.get('title') ){
-						layer.setOpacity(parseFloat(opacityLayer.value));
-					}
-				});
-			} else {	
-				if (opacityLayer.dom_element.parentElement.firstElementChild.value == layer.get('title') ){
-					layer.setOpacity(parseFloat(opacityLayer.value));
-				}
-			}
-		});
-	},[opacityLayer.value])
-
-	//HANDLER CHANGE LAYERS
-	useEffect(() => {
-		if (!map && !optionsMap) return;
-		map.getLayers().forEach(layer => {
-			if (layer instanceof LayerGroup){
-				layer.getLayers().forEach((lyr,index,array) => {
-					if (selectLayers.COMARQUES_LAYER && lyr && lyr.get('title') == layers.COMARQUES_LAYER ||
-						selectLayers.MUNICIPIS_LAYER && lyr && lyr.get('title') == layers.MUNICIPIS_LAYER){
-						layer.setVisible(true);
-					} else if (layer){
-						map.removeLayer(layer);
-						layer.setVisible(false);
-					}
-				});
-			} else {	
-				if (selectedBaseLayer.ORTOFOTOMAPA_MAP && layer && layer.get('title') == baseLayers.ORTOFOTOMAPA_MAP ||
-					selectedBaseLayer.TOPOGRAFIC_MAP && layer && layer.get('title') == baseLayers.TOPOGRAFIC_MAP){
-						layer.setVisible(true);
-				} else if (layer){
-					map.removeLayer(layer);
-					layer.setVisible(false);
-				}
-			}
-		});
-	},[selectedBaseLayer , selectLayers.COMARQUES_LAYER , selectLayers.MUNICIPIS_LAYER])
-
 	return (
 		<MapContext.Provider value={{ map }}>
 			<div ref={mapRef} className="ol-map">

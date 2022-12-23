@@ -51,7 +51,7 @@ const Login = (props) => {
             <Container className="main-container">
                 <Row className="justify-content-md-center">
                     <h4>LOGUEJAT</h4>
-                    <Form className="register-form margin-top-20">
+                    <Form className="register-form mt-20">
                         <Form.Group controlId="username">
                             <Form.Label>Usuari</Form.Label>
                             <Form.Control
@@ -63,7 +63,7 @@ const Login = (props) => {
                                 }}
                             />
                         </Form.Group>
-                        <Form.Group controlId="password" className="margin-top-20">
+                        <Form.Group controlId="password" className="mt-20">
                             <Form.Label>Contrasenya</Form.Label>
                             <Form.Control
                                 type="password"
@@ -74,12 +74,12 @@ const Login = (props) => {
                                 }}
                             />
                         </Form.Group>
-                        <Button onClick={login} className="margin-top-20"> Accedir </Button>
+                        <Button onClick={login} className="mt-20"> Accedir </Button>
                     </Form>
-                    {loginResult.messageError != null && <Alert className="margin-top-20" variant={'danger'}>
+                    {loginResult.messageError != null && <Alert className="mt-20" variant={'danger'}>
                         {loginResult.messageError} 
                     </Alert>}
-                    <div className="margin-top-20">
+                    <div className="mt-20">
                         <div>Usuari: adminColegiGeografs</div>
                         <div>Password: @32250170a0dca92d53ec9624f336ca24</div>
                     </div>
