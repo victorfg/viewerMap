@@ -88,11 +88,6 @@ const VectorLayer = ({ usersData }) => {
 		map.addLayer(vectorLayer) 
 		vectorLayer.setZIndex(400);
 
-		return () => {
-			if (map) {
-				//map.removeLayer(vectorLayer);
-			}
-		};
 	}, [map, usersData]);
 
 	return null;
