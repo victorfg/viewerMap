@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import Head from 'next/head'
 import { motion, useCycle } from "framer-motion";
 import { Layers, BaseLayers, GroupLayers, VectorLayer } from "../components/map/Layers";
 import { topo, orto, comarques,municipis } from "../components/map/Source";
@@ -10,7 +11,6 @@ import MenuToggle from '../components/menu/MenuToogle'
 import {sidebarTransition} from '../components/constantsTransitions'
 import Image from 'next/image'
 import * as ol from "ol";
-import {get as getProjection} from 'ol/proj';
 import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/Functions'
 import { useMapContext } from '../store/contexts/MapContextProvider';
 import { cataloniaCoord } from "../components/map/Utils/Constants";
@@ -97,6 +97,10 @@ export default function HomeMap() {
 
   return (
       <>   
+					<Head>
+							<title>My Map</title>
+							<meta name="viewport" content="initial-scale=1, width=device-width" />
+					</Head>
           <div id="map" className="map">
               {/*<div id="popup" className="ol-popup">
                   <a href="#" id="popup-closer" className="ol-popup-closer"></a>
