@@ -1,26 +1,56 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useCycle } from "framer-motion";
-import MenuComponent from "../components/map/Menu/MenuComponent";
 import { Layers, BaseLayers, GroupLayers, VectorLayer } from "../components/map/Layers";
 import { topo, orto, comarques,municipis } from "../components/map/Source";
 import { baseLayers, layers } from "../components/map/Utils/Constants";
-import { Controls, FullScreenControl } from "../components/map/Controls";
 import Map from "../components/map/Map";
 import { useDimensions } from "../hooks/customHooks";
 import {NavigationItems} from '../components/menu/NavigationItems'
 import MenuToggle from '../components/menu/MenuToogle'
-import {sidebarTransition} from '../components/constants'
+import {sidebarTransition} from '../components/constantsTransitions'
+import Image from 'next/image'
+import * as ol from "ol";
+import {get as getProjection} from 'ol/proj';
+import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/Functions'
+import { useMapContext } from '../store/contexts/MapContextProvider';
+import { cataloniaCoord } from "../components/map/Utils/Constants";
+
 
 export default function HomeMap() {
-  const [openMenuOptions, setOpenMenuOptions] = useState(false);
+  setProjection_EPSG_25831();
+  const { viewCatalonia,setMapObject, setViewCatalonia } = useMapContext();
+
   const [selectedBaseLayer, setSelectedBaseLayer] = useState({ ORTOFOTOMAPA_MAP: true, TOPOGRAFIC_MAP: false });
   const [selectLayers, setSelectLayers] = useState({ COMARQUES_LAYER:false, MUNICIPIS_LAYER:false });
   const [opacityLayer, setOpacityLayer] = useState({dom_element: null, value: null});
-  const [usersData, setUsersData] = useState(null);
 
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
+
+  useEffect(() => {
+    let setView = new ol.View({
+      center: [396905,4618292],
+      zoom: 3,
+      projection: setExtension(),
+      extent: cataloniaCoord
+    })
+    setViewCatalonia(setView); 
+    setMapObject(new ol.Map({controls:[], view: setView}));
+  }, []);
+                                                        
+  useEffect(() => { 
+		let generalZoom = document.querySelector(".general-zoom");
+    if (generalZoom){
+      setTimeout(() => {
+        if (isOpen){
+          generalZoom.style.zIndex = 0;
+        } else {
+          generalZoom.style.zIndex = 1;
+        }
+      }, 800);
+    }
+	}, [isOpen]);
 
   const handlerRadioButtonsBaseLayer = (ev) => {
       let newObj = {
@@ -56,46 +86,42 @@ export default function HomeMap() {
       setOpacityLayer(newObj);
   }
 
+  const setGeneralZoom = () => {
+    viewCatalonia.animate({
+      center: [396905,4618292],
+      duration: 5000,
+      extent: cataloniaCoord,
+      zoom: 1,
+    });
+  }
+
   return (
-      <>
-          {/*<MenuComponent 
-              selectedBaseLayer={selectedBaseLayer} 
-              openMenuOptions={openMenuOptions}
-              handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
-              handlerCheckButtonsLayers={handlerCheckButtonsLayers}
-              handlerOpacityLayer={handlerOpacityLayer}
-          />*/}    
+      <>   
           <div id="map" className="map">
               {/*<div id="popup" className="ol-popup">
                   <a href="#" id="popup-closer" className="ol-popup-closer"></a>
                   <div id="popup-content"></div>
               </div>*/}
-              <motion.nav
-                  className={`menu ${isOpen ? 'z-10' : ''}`}
-                  initial={false}
-                  animate={isOpen ? "open" : "closed"}
-                  custom={height}
-                  ref={containerRef} 
-              >
-                  <motion.div className={`background ${isOpen ? 'rounded-3xl' : ''}`} variants={sidebarTransition} />
-                  <NavigationItems 
-                    handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
-                    handlerOpacityLayer={handlerOpacityLayer}
-                    handlerCheckButtonsLayers={handlerCheckButtonsLayers}
-                    selectedBaseLayer={selectedBaseLayer}
-                  />
-                  <MenuToggle toggle={() => toggleOpen()} />
-                  {/*<div id="menuLeft" className="bar-menu-left" onClick={() => setOpenMenuOptions(prevState => !prevState)}>
-                      <svg className="h-8 w-8"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
-                      </svg>
-                  </div>*/}            
-              </motion.nav>
-              <Map 
-                  selectedBaseLayer={selectedBaseLayer} 
-                  selectLayers={selectLayers}
-                  opacityLayer={opacityLayer}
-              >
+              <div>
+                <motion.nav
+                    className={`menu ${isOpen ? 'z-10' : ''}`}
+                    initial={false}
+                    animate={isOpen ? "open" : "closed"}
+                    custom={height}
+                    ref={containerRef} 
+                >
+                    <motion.div className={`background ${isOpen ? 'rounded-3xl' : ''}`} variants={sidebarTransition} />
+                    <NavigationItems 
+                      handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
+                      handlerOpacityLayer={handlerOpacityLayer}
+                      handlerCheckButtonsLayers={handlerCheckButtonsLayers}
+                      selectedBaseLayer={selectedBaseLayer}
+                    />
+                    <MenuToggle toggle={() => toggleOpen()} />          
+                </motion.nav>
+                <div className="general-zoom"><Image src="/zoomGeneral.png" alt="me" width="40" height="40" onClick={setGeneralZoom} /></div>
+              </div>
+              <Map>
                   <Layers>
                       {selectedBaseLayer.TOPOGRAFIC_MAP && (
                           <BaseLayers

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import {navigationItemsTransitions,itemIds, menuItemTransition, menuColorsItemTransition} from '../constants'
+import {navigationItemsTransitions,itemIds, menuItemTransition, menuColorsItemTransition} from '../constantsTransitions'
 import  MenuComponent  from "../../components/map/Menu/MenuComponent";
 const MenuItem = (props,{ i }) => {
     const style = { border: `2px solid ${menuColorsItemTransition[i]}` };

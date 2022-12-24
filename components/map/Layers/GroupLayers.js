@@ -2,12 +2,13 @@ import { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
 import OLTileLayer from "ol/layer/Tile";
 import LayerGroup from 'ol/layer/Group';
+import { useMapContext } from '../../../store/contexts/MapContextProvider';
 
 const GroupLayers = ({ source, title, selectedBaseLayer}) => {
-	const { map } = useContext(MapContext);
+    const { mapObject } = useMapContext();
 
 	useEffect(() => {
-		if (!map) return;
+		if (!mapObject) return;
 
         let tileLayer;
 
@@ -22,8 +23,8 @@ const GroupLayers = ({ source, title, selectedBaseLayer}) => {
             layers: olTileLayers
         })
         
-        map.addLayer(tileLayer);
-	}, [map, selectedBaseLayer]);
+        mapObject.addLayer(tileLayer);
+	}, [mapObject, selectedBaseLayer]);
 
 	return null;
 };
