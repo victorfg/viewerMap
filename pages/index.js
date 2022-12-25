@@ -16,7 +16,7 @@ import { useMapContext } from '../store/contexts/MapContextProvider';
 import { cataloniaCoord } from "../components/map/Utils/Constants";
 import Script from 'next/script'
 import useDeviceDetect from '../hooks/customHooks'
-import TileLayer from 'ol/layer/Tile.js';
+import { SidebarMobile } from "../components/menu/SidebarMobile";
 
 
 export default function HomeMap() {
@@ -136,11 +136,13 @@ export default function HomeMap() {
 							{isMobile &&
 							<>
 								<div className="main-menu-mobile ">
-									<Sidebar />
+									<SidebarMobile 
+										handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
+										handlerOpacityLayer={handlerOpacityLayer}
+										handlerCheckButtonsLayers={handlerCheckButtonsLayers}
+										selectedBaseLayer={selectedBaseLayer}
+									/>
 								</div>
-
-										
-				
 							</>
 							}
               <Map>
@@ -190,34 +192,3 @@ export default function HomeMap() {
       </>
   )
 }
-
-const Sidebar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
-
-  return (
-    <>
-      {showSidebar ? (
-        <button
-          className="flex text-4xl items-center cursor-pointer fixed top-6 z-50"
-          onClick={() => setShowSidebar(!showSidebar)}
-        >
-          x
-        </button>
-      ) : (
-        <svg 
-					onClick={() => setShowSidebar(!showSidebar)}
-					width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path fill="none" stroke="#000" stroke-width="2" d="M2,19 L22,19 M2,5 L22,5 M2,12 L22,12"/>
-				</svg>
-      )}
-
-      <div
-        className={`top-0 ${showSidebar ? 'left-0 ' : ' left-0'} bg-white fixed h-full z-40  ease-in-out duration-300 ${ showSidebar ? "translate-x-0 " : "transform-100"}`}
-      >
-        <h3 className="mt-20 text-4xl font-semibold">
-          I am a sidebar
-        </h3>
-      </div>
-    </>
-  );
-};
