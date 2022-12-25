@@ -34,30 +34,14 @@ export default function HomeMap() {
 	const { isMobile } = useDeviceDetect();
 
   useEffect(() => {
-		if (isMobile){
-			setMapObject(new ol.Map({
-				layers: [
-					new TileLayer({
-						source: new OSM(),
-					}),
-				],
-				//target: 'map',
-				view: new View({
-					center: [0, 0],
-					zoom: 2,
-				}),
-			}));
-		}else{
-			let setView = new ol.View({
-				center: [396905,4618292],
-				zoom: 3,
-				projection: setExtension(),
-				extent: cataloniaCoord
-			})
-			setViewCatalonia(setView); 
-			setMapObject(new ol.Map({view: setView}));
-		}
-
+		let setView = new ol.View({
+			center: [396905,4618292],
+			zoom: 3,
+			projection: setExtension(),
+			extent: cataloniaCoord
+		})
+		setViewCatalonia(setView); 
+		setMapObject(new ol.Map({view: setView}));
   }, []);
                                                         
   useEffect(() => { 
@@ -147,6 +131,7 @@ export default function HomeMap() {
                 </motion.nav>
                 <div className="general-zoom"><Image src="/zoomGeneral.png" alt="me" width="40" height="40" onClick={setGeneralZoom} /></div>
               </div>}
+							{isMobile && <div>CACA</div>}
               <Map>
                   <Layers>
                       {selectedBaseLayer.TOPOGRAFIC_MAP && (
