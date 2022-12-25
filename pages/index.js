@@ -15,6 +15,8 @@ import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/
 import { useMapContext } from '../store/contexts/MapContextProvider';
 import { cataloniaCoord } from "../components/map/Utils/Constants";
 import Script from 'next/script'
+import useDeviceDetect from '../hooks/customHooks'
+import TileLayer from 'ol/layer/Tile.js';
 
 
 export default function HomeMap() {
@@ -29,15 +31,33 @@ export default function HomeMap() {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
 
+	const { isMobile } = useDeviceDetect();
+
   useEffect(() => {
-    let setView = new ol.View({
-      center: [396905,4618292],
-      zoom: 3,
-      projection: setExtension(),
-      extent: cataloniaCoord
-    })
-    setViewCatalonia(setView); 
-    setMapObject(new ol.Map({view: setView}));
+		if (isMobile){
+			setMapObject(new ol.Map({
+				layers: [
+					new TileLayer({
+						source: new OSM(),
+					}),
+				],
+				//target: 'map',
+				view: new View({
+					center: [0, 0],
+					zoom: 2,
+				}),
+			}));
+		}else{
+			let setView = new ol.View({
+				center: [396905,4618292],
+				zoom: 3,
+				projection: setExtension(),
+				extent: cataloniaCoord
+			})
+			setViewCatalonia(setView); 
+			setMapObject(new ol.Map({view: setView}));
+		}
+
   }, []);
                                                         
   useEffect(() => { 
@@ -108,7 +128,7 @@ export default function HomeMap() {
                   <a href="#" id="popup-closer" className="ol-popup-closer"></a>
                   <div id="popup-content"></div>
               </div>*/}
-              <div>
+              {!isMobile && <div>
                 <motion.nav
                     className={`menu ${isOpen ? 'z-10' : ''}`}
                     initial={false}
@@ -126,7 +146,7 @@ export default function HomeMap() {
                     <MenuToggle toggle={() => toggleOpen()} />          
                 </motion.nav>
                 <div className="general-zoom"><Image src="/zoomGeneral.png" alt="me" width="40" height="40" onClick={setGeneralZoom} /></div>
-              </div>
+              </div>}
               <Map>
                   <Layers>
                       {selectedBaseLayer.TOPOGRAFIC_MAP && (
