@@ -14,6 +14,7 @@ import * as ol from "ol";
 import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/Functions'
 import { useMapContext } from '../store/contexts/MapContextProvider';
 import { cataloniaCoord } from "../components/map/Utils/Constants";
+import Script from 'next/script'
 
 
 export default function HomeMap() {
@@ -36,7 +37,7 @@ export default function HomeMap() {
       extent: cataloniaCoord
     })
     setViewCatalonia(setView); 
-    setMapObject(new ol.Map({controls:[], view: setView}));
+    setMapObject(new ol.Map({view: setView}));
   }, []);
                                                         
   useEffect(() => { 
@@ -99,8 +100,9 @@ export default function HomeMap() {
       <>   
 					<Head>
 							<title>My Map</title>
-							<meta name="viewport" content="initial-scale=1, width=device-width" />
+							<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 					</Head>
+					<Script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></Script>
           <div id="map" className="map">
               {/*<div id="popup" className="ol-popup">
                   <a href="#" id="popup-closer" className="ol-popup-closer"></a>
