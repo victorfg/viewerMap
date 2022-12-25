@@ -112,26 +112,27 @@ export default function HomeMap() {
                   <a href="#" id="popup-closer" className="ol-popup-closer"></a>
                   <div id="popup-content"></div>
               </div>*/}
-              {!isMobile && <div>
-                <motion.nav
-                    className={`menu ${isOpen ? 'z-10' : ''}`}
-                    initial={false}
-                    animate={isOpen ? "open" : "closed"}
-                    custom={height}
-                    ref={containerRef} 
-                >
-                    <motion.div className={`background ${isOpen ? 'rounded-3xl' : ''}`} variants={sidebarTransition} />
-                    <NavigationItems 
-                      handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
-                      handlerOpacityLayer={handlerOpacityLayer}
-                      handlerCheckButtonsLayers={handlerCheckButtonsLayers}
-                      selectedBaseLayer={selectedBaseLayer}
-                    />
-                    <MenuToggle toggle={() => toggleOpen()} />          
-                </motion.nav>
+              {!isMobile && 
+								<div>
+									<motion.nav
+											className={`menu ${isOpen ? 'z-10' : ''}`}
+											initial={false}
+											animate={isOpen ? "open" : "closed"}
+											custom={height}
+											ref={containerRef} 
+									>
+											<motion.div className={`background ${isOpen ? 'rounded-3xl' : ''}`} variants={sidebarTransition} />
+											<NavigationItems 
+												handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
+												handlerOpacityLayer={handlerOpacityLayer}
+												handlerCheckButtonsLayers={handlerCheckButtonsLayers}
+												selectedBaseLayer={selectedBaseLayer}
+											/>
+											<MenuToggle toggle={() => toggleOpen()} />          
+									</motion.nav>
                 <div className="general-zoom"><Image src="/zoomGeneral.png" alt="me" width="40" height="40" onClick={setGeneralZoom} /></div>
               </div>}
-							{isMobile && <div>CACA</div>}
+							{isMobile && <MenuMobile/>}
               <Map>
                   <Layers>
                       {selectedBaseLayer.TOPOGRAFIC_MAP && (
@@ -178,4 +179,14 @@ export default function HomeMap() {
           </div>
       </>
   )
+}
+
+const MenuMobile = () => {
+	return (
+		<div className="main-menu-mobile">
+			<svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  			<path fill="none" stroke="#000" stroke-width="2" d="M2,19 L22,19 M2,5 L22,5 M2,12 L22,12"/>
+			</svg>
+		</div>
+	)
 }

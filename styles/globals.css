@@ -77,6 +77,13 @@ a {
   background: transparent;
 }
 
+.main-menu-mobile{
+  padding-top: 15px;
+  padding-left: 15px;
+  height: 50px;
+  background-color: rgba(245, 245, 245, 0.3);
+}
+
 /* End Menu */
 
 .label-layer-name{
