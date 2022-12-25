@@ -79,7 +79,6 @@ a {
 
 .main-menu-mobile{
   padding-top: 13px;
-  padding-left: 13px;
   height: 50px;
   background-color: white;
   z-index: 1;
@@ -89,6 +88,11 @@ a {
   height: 50px;
   margin-top: 15px;
   margin-left: 15px;
+  padding-left: 13px;
+}
+
+.transform-100{
+  transform: translateX(-100%);
 }
 
 /* End Menu */
