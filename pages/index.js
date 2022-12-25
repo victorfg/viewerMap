@@ -41,7 +41,7 @@ export default function HomeMap() {
 			extent: cataloniaCoord
 		})
 		setViewCatalonia(setView); 
-		setMapObject(new ol.Map({view: setView}));
+		setMapObject(new ol.Map({controls:[],view: setView}));
   }, []);
                                                         
   useEffect(() => { 
