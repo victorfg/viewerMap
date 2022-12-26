@@ -46,7 +46,7 @@ export default function HomeMap() {
 			extent: cataloniaCoord
 		})
 		setViewCatalonia(setView); 
-		setMapObject(new ol.Map({controls:[new Rotate({ autoHide: false })],interactions: null, view: setView}));
+		setMapObject(new ol.Map({controls:[new Rotate({ autoHide: false, className: 'far fa-compass', label:'' })],interactions: null, view: setView}));
   }, []);
                                                         
   useEffect(() => { 
