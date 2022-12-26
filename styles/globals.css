@@ -134,5 +134,14 @@ a {
   font-size: 25px;
   background-color: white;
   border-radius: 50%;
-  z-index: 30;
+}
+
+.north-rotate{
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
+  z-index: 1;
 }

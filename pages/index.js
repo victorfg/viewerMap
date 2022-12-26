@@ -164,6 +164,9 @@ export default function HomeMap() {
                                 setShowSidebar={setShowSidebar}
                             />
                         </div>
+                        <div className="north-rotate">
+                            <Image src="/north-rotate.png" alt="me" width="25" height="25" />
+                        </div>
                     </>
                 }
               <Map>
