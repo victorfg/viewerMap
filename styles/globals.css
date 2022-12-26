@@ -128,7 +128,7 @@ a {
 
 .ol-rotate{
   position: absolute;
-  bottom: 15px;
+  bottom: 215px;
   right: 15px;
   color: black;
   font-size: 25px;
@@ -138,7 +138,7 @@ a {
 
 .north-rotate{
   position: absolute;
-  bottom: 15px;
+  bottom: 315px;
   right: 20px;
   background-color: white;
   border-radius: 50%;
