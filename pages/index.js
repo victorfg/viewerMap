@@ -23,7 +23,7 @@ import Rotate from 'ol/control/Rotate'
 
 export default function HomeMap() {
   setProjection_EPSG_25831();
-  const { viewCatalonia,setMapObject, setViewCatalonia } = useMapContext();
+  const { mapObject,viewCatalonia,setMapObject, setViewCatalonia } = useMapContext();
 
   const [selectedBaseLayer, setSelectedBaseLayer] = useState({ ORTOFOTOMAPA_MAP: true, TOPOGRAFIC_MAP: false });
   const [selectLayers, setSelectLayers] = useState({ COMARQUES_LAYER:false, MUNICIPIS_LAYER:false });
@@ -105,6 +105,10 @@ export default function HomeMap() {
     });
   }
 
+  const setNorthPosition = () => {
+    mapObject.getView().setRotation(0);
+  }
+
   const onClickMap = (ev) => {
     if (isMobile && showSidebar){
         let myElement = document.getElementById('sidebarMobile');
@@ -165,7 +169,7 @@ export default function HomeMap() {
                             />
                         </div>
                         <div className="north-rotate">
-                            <Image src="/north-rotate.png" alt="me" width="25" height="25" />
+                            <Image src="/north-rotate.png" alt="me" width="25" height="25" onClick={setNorthPosition}/>
                         </div>
                     </>
                 }
