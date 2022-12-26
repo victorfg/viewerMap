@@ -17,6 +17,7 @@ import { useMapContext } from '../store/contexts/MapContextProvider';
 import { cataloniaCoord } from "../components/map/Utils/Constants";
 import useDeviceDetect from '../hooks/customHooks'
 import { SidebarMobile } from "../components/menu/SidebarMobile";
+import {FullScreen, defaults as defaultControls} from 'ol/control.js'
 
 
 export default function HomeMap() {
@@ -42,7 +43,7 @@ export default function HomeMap() {
 			extent: cataloniaCoord
 		})
 		setViewCatalonia(setView); 
-		setMapObject(new ol.Map({controls:[],view: setView}));
+		setMapObject(new ol.Map({controls:[],interactions: null, view: setView}));
   }, []);
                                                         
   useEffect(() => { 
