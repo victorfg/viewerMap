@@ -18,6 +18,7 @@ import { cataloniaCoord } from "../components/map/Utils/Constants";
 import useDeviceDetect from '../hooks/customHooks'
 import { SidebarMobile } from "../components/menu/SidebarMobile";
 import {FullScreen, defaults as defaultControls} from 'ol/control.js'
+import Rotate from 'ol/control/Rotate'
 
 
 export default function HomeMap() {
@@ -36,6 +37,8 @@ export default function HomeMap() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
+        //let controls = new Control({rotate: false});
+        //let interactions = new Interaction({altShiftDragRotate:false, pinchRotate:false}); 
 		let setView = new ol.View({
 			center: [396905,4618292],
 			zoom: 3,
@@ -43,7 +46,7 @@ export default function HomeMap() {
 			extent: cataloniaCoord
 		})
 		setViewCatalonia(setView); 
-		setMapObject(new ol.Map({controls:[],interactions: null, view: setView}));
+		setMapObject(new ol.Map({controls:[new Rotate({ autoHide: false })],interactions: null, view: setView}));
   }, []);
                                                         
   useEffect(() => { 
