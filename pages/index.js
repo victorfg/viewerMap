@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import Script from 'next/script'
 import Head from 'next/head'
 import { motion, useCycle } from "framer-motion";
 import { Layers, BaseLayers, GroupLayers, VectorLayer } from "../components/map/Layers";
@@ -14,7 +15,6 @@ import * as ol from "ol";
 import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/Functions'
 import { useMapContext } from '../store/contexts/MapContextProvider';
 import { cataloniaCoord } from "../components/map/Utils/Constants";
-import Script from 'next/script'
 import useDeviceDetect from '../hooks/customHooks'
 import { SidebarMobile } from "../components/menu/SidebarMobile";
 
@@ -31,8 +31,8 @@ export default function HomeMap() {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
 
-	const { isMobile } = useDeviceDetect();
-	const [showSidebar, setShowSidebar] = useState(false);
+  const { isMobile } = useDeviceDetect();
+  const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
 		let setView = new ol.View({
@@ -58,27 +58,27 @@ export default function HomeMap() {
     }
 	}, [isOpen]);
 
-  const handlerRadioButtonsBaseLayer = (ev) => {
+  const handlerRadioButtonsBaseLayer = (layerSelec) => {
       let newObj = {
-          TOPOGRAFIC_MAP: ev.value == baseLayers.TOPOGRAFIC_MAP ? ev.checked : !ev.checked,
-          ORTOFOTOMAPA_MAP: ev.value == baseLayers.ORTOFOTOMAPA_MAP ? ev.checked : !ev.checked
+          TOPOGRAFIC_MAP: layerSelec == baseLayers.TOPOGRAFIC_MAP,
+          ORTOFOTOMAPA_MAP: layerSelec == baseLayers.ORTOFOTOMAPA_MAP
       }
       setSelectedBaseLayer(newObj);
   }
 
-  const handlerCheckButtonsLayers = (ev) => {
-      switch (ev.value) {
+  const handlerCheckButtonsLayers = (layerSelec) => {
+      switch (layerSelec) {
           case layers.COMARQUES_LAYER:
               setSelectLayers((prevState) => ({
                   ...prevState,
-                  COMARQUES_LAYER: ev.checked
+                  COMARQUES_LAYER: !prevState.COMARQUES_LAYER
               }));
               break;
       
           case layers.MUNICIPIS_LAYER:
               setSelectLayers((prevState) => ({
                   ...prevState,
-                  MUNICIPIS_LAYER: ev.checked
+                  MUNICIPIS_LAYER: !prevState.MUNICIPIS_LAYER
               }));
               break;
       }
@@ -101,50 +101,67 @@ export default function HomeMap() {
     });
   }
 
+  const onClickMap = (ev) => {
+    if (isMobile && showSidebar){
+        let myElement = document.getElementById('sidebarMobile');
+        let bounding = myElement.getBoundingClientRect();
+        if (bounding.width < ev.clientX){
+            setShowSidebar(false);
+        }
+    }
+  }
+
   return (
       <>   
-					<Head>
-							<title>My Map</title>
-							<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-					</Head>
-					<Script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></Script>
-          <div id="map" className="map">
+        <Head>
+            <title>My Map</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        </Head>
+        <Script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></Script>
+          <div id="map" className="map" onClick={onClickMap}>
               {/*<div id="popup" className="ol-popup">
                   <a href="#" id="popup-closer" className="ol-popup-closer"></a>
                   <div id="popup-content"></div>
               </div>*/}
-              {!isMobile && 
-								<div>
-									<motion.nav
-											className={`menu ${isOpen ? 'z-10' : ''}`}
-											initial={false}
-											animate={isOpen ? "open" : "closed"}
-											custom={height}
-											ref={containerRef} 
-									>
-											<motion.div className={`background ${isOpen ? 'rounded-3xl' : ''}`} variants={sidebarTransition} />
-											<NavigationItems 
-												handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
-												handlerOpacityLayer={handlerOpacityLayer}
-												handlerCheckButtonsLayers={handlerCheckButtonsLayers}
-												selectedBaseLayer={selectedBaseLayer}
-											/>
-											<MenuToggle toggle={() => toggleOpen()} />          
-									</motion.nav>
-                <div className="general-zoom"><Image src="/zoomGeneral.png" alt="me" width="40" height="40" onClick={setGeneralZoom} /></div>
-              </div>}
-							{isMobile &&
-							<>
-								<div className="main-menu-mobile ">
-									<SidebarMobile 
-										handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
-										handlerOpacityLayer={handlerOpacityLayer}
-										handlerCheckButtonsLayers={handlerCheckButtonsLayers}
-										selectedBaseLayer={selectedBaseLayer}
-									/>
-								</div>
-							</>
-							}
+                {!isMobile && 
+                    <>
+                        <motion.nav
+                                className={`menu ${isOpen ? 'z-10' : ''}`}
+                                initial={false}
+                                animate={isOpen ? "open" : "closed"}
+                                custom={height}
+                                ref={containerRef} 
+                        >
+                                <motion.div className={`background ${isOpen ? 'rounded-3xl' : ''}`} variants={sidebarTransition} />
+                                <NavigationItems 
+                                    handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
+                                    handlerOpacityLayer={handlerOpacityLayer}
+                                    handlerCheckButtonsLayers={handlerCheckButtonsLayers}
+                                    selectedBaseLayer={selectedBaseLayer}
+                                    selectLayers={selectLayers}
+                                />
+                                <MenuToggle toggle={() => toggleOpen()} />          
+                        </motion.nav>
+                        <div className="general-zoom">
+                            <Image src="/zoomGeneral.png" alt="me" width="40" height="40" onClick={setGeneralZoom} />
+                        </div>
+                    </>
+                }
+                {isMobile &&
+                    <>
+                        <div className="main-menu-mobile ">
+                            <SidebarMobile 
+                                handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
+                                handlerOpacityLayer={handlerOpacityLayer}
+                                handlerCheckButtonsLayers={handlerCheckButtonsLayers}
+                                selectedBaseLayer={selectedBaseLayer}
+                                selectLayers={selectLayers}
+                                showSidebar={showSidebar}
+                                setShowSidebar={setShowSidebar}
+                            />
+                        </div>
+                    </>
+                }
               <Map>
                   <Layers>
                       {selectedBaseLayer.TOPOGRAFIC_MAP && (

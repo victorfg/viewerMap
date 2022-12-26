@@ -17,7 +17,7 @@ const MenuItem = (props,{ i }) => {
 export function NavigationItems (props) {
   return (
     <motion.div
-      className="flex justify-center mt-20 items-center" 
+      className="flex ml-10 mt-20 items-center" 
       variants={navigationItemsTransitions}
     >
       {itemIds.map(i => (
