@@ -127,19 +127,18 @@ a {
 }
 
 @media only screen and (max-width: 650px) {
-  .fa-compass{
+  .north-rotate{
     position: absolute;
     bottom: 20vh;
     right: 15px;
     color: black;
-    font-size: 25px;
     background-color: white;
     border-radius: 50%;
-    padding: 5px;
+    padding: 2px;
   }
 }
 @media only screen and (min-width: 650px) {
-  .ol-rotate{
+  .north-rotate{
     display: none;
   }
 }

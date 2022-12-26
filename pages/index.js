@@ -46,7 +46,7 @@ export default function HomeMap() {
 			extent: cataloniaCoord
 		})
 		setViewCatalonia(setView); 
-		setMapObject(new ol.Map({controls:[new Rotate({ autoHide: false, className: 'far fa-compass', label:'' })],interactions: null, view: setView}));
+		setMapObject(new ol.Map({controls:[],interactions: null, view: setView}));
   }, []);
                                                         
   useEffect(() => { 
@@ -163,6 +163,9 @@ export default function HomeMap() {
                                 showSidebar={showSidebar}
                                 setShowSidebar={setShowSidebar}
                             />
+                        </div>
+                        <div className="north-rotate">
+                            <Image src="/north-rotate.png" alt="me" width="25" height="25" />
                         </div>
                     </>
                 }
