@@ -17,9 +17,9 @@ import { useMapContext } from '../store/contexts/MapContextProvider';
 import { SidebarMobile } from "../components/menu/SidebarMobile";
 import Geolocation from 'ol/Geolocation.js';
 import Feature from 'ol/Feature.js';
-import VectorLayer from 'ol/layer/Vector.js';
 import Point from 'ol/geom/Point.js';
-import {Vector as VectorSource} from 'ol/source.js';
+import OLVectorLayer from "ol/layer/Vector";
+import { Vector as VectorSource } from 'ol/source';
 
 
 export default function HomeMap() {
@@ -147,15 +147,15 @@ export default function HomeMap() {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
-        //let caca = new VectorLayer({})
+        //let caca = new OLVectorLayer({})
 
-        /*const markerPosition = new OLVectorLayer({
+        const markerPosition = new OLVectorLayer({
             source: new VectorSource({
                 features: [accuracyFeature, positionFeature],
             }),
         });
         
-        mapObject.addLayer(markerPosition);*/
+        mapObject.addLayer(markerPosition);
 		});
   }
 
