@@ -156,7 +156,7 @@ export default function HomeMap() {
                 features: []
             });
             console.log('vectorLayer')
-            let caguen = new VectorLayer({});
+            //let caguen = new VectorLayer({});
         } catch (error) {
             console.log('caca '+error)
         }
