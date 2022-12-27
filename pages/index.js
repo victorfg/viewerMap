@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Script from 'next/script'
 import Head from 'next/head'
 import { motion, useCycle } from "framer-motion";
-import { Layers, BaseLayers, GroupLayers, VectorLayer } from "../components/map/Layers";
+import { Layers, BaseLayers, GroupLayers } from "../components/map/Layers";
 import { topo, orto, comarques,municipis } from "../components/map/Source";
 import { baseLayers, layers } from "../components/map/Utils/Constants";
 import Map from "../components/map/Map";
@@ -17,13 +17,24 @@ import { useMapContext } from '../store/contexts/MapContextProvider';
 import { cataloniaCoord } from "../components/map/Utils/Constants";
 import useDeviceDetect from '../hooks/customHooks'
 import { SidebarMobile } from "../components/menu/SidebarMobile";
-import {FullScreen, defaults as defaultControls} from 'ol/control.js'
-import Rotate from 'ol/control/Rotate'
+import Geolocation from 'ol/Geolocation.js';
+import Feature from 'ol/Feature.js';
+import {Vector as VectorSource} from 'ol/source.js';
+import {Vector as VectorLayerOL} from 'ol/layer.js';
+import Point from 'ol/geom/Point.js';
 
 
 export default function HomeMap() {
   setProjection_EPSG_25831();
-  const { mapObject,viewCatalonia,setMapObject, setViewCatalonia } = useMapContext();
+  const { 
+		mapObject,
+		viewCatalonia, 
+		geolocationCat,
+		setMapObject, 
+		setViewCatalonia, 
+		setGeolocationCat,
+		positionFeature 
+	} = useMapContext();
 
   const [selectedBaseLayer, setSelectedBaseLayer] = useState({ ORTOFOTOMAPA_MAP: true, TOPOGRAFIC_MAP: false });
   const [selectLayers, setSelectLayers] = useState({ COMARQUES_LAYER:false, MUNICIPIS_LAYER:false });
@@ -37,16 +48,21 @@ export default function HomeMap() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
-        //let controls = new Control({rotate: false});
-        //let interactions = new Interaction({altShiftDragRotate:false, pinchRotate:false}); 
-		let setView = new ol.View({
-			center: [396905,4618292],
-			zoom: 3,
-			projection: setExtension(),
-			extent: cataloniaCoord
-		})
-		setViewCatalonia(setView); 
-		setMapObject(new ol.Map({controls:[],interactions: null, view: setView}));
+    const cataloniaView = new ol.View({
+        center: [396905,4618292],
+        zoom: 3,
+        projection: setExtension(),
+        extent: cataloniaCoord
+    });
+    const geolocation = new Geolocation({
+        trackingOptions: {
+            enableHighAccuracy: true,
+        },
+        projection: cataloniaView.getProjection(),
+    });
+    setViewCatalonia(cataloniaView); 
+    setGeolocationCat(geolocation); 
+    setMapObject(new ol.Map({controls:[],interactions: null, view: cataloniaView}));
   }, []);
                                                         
   useEffect(() => { 
@@ -119,6 +135,42 @@ export default function HomeMap() {
     }
   }
 
+  const setGeolocationUser = () => {
+		//example https://openlayers.org/en/latest/examples/geolocation.html
+		const accuracyFeature = new Feature();
+
+		geolocationCat.setTracking(true);
+
+		geolocationCat.on('change:accuracyGeometry', function () {
+			accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
+		});
+
+		geolocationCat.on('change:position', function () {
+			const coordinates = geolocationCat.getPosition();
+			positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+
+			const markerPosition = new VectorLayerOL({
+				source: new VectorSource({
+					features: [accuracyFeature, positionFeature],
+				}),
+			});
+			
+			mapObject.addLayer(markerPosition); 
+		});
+  }
+
+  /*geolocationCat?.on('change', function () {
+    console.log('accuracy ' + geolocationCat.getAccuracy() + ' [m]');
+    console.log('altitude ' + geolocationCat.getAltitude() + ' [m]');
+    console.log('altitudeAccuracy ' + geolocationCat.getAltitudeAccuracy() + ' [m]');
+    console.log('heading ' + geolocationCat.getHeading() + ' [m]');
+    console.log('speed ' + geolocationCat.getSpeed() + ' [m]');
+  });
+
+  geolocationCat?.on('error', function (error) {
+    console.log(error.message);
+  });*/
+
   return (
       <>   
         <Head>
@@ -172,7 +224,7 @@ export default function HomeMap() {
                             <Image src="/north-rotate.png" alt="me" width="25" height="25" onClick={setNorthPosition}/>
                         </div>
                         <div className="geolocation-user">
-                            <Image src="/location.png" alt="me" width="25" height="25" onClick={setNorthPosition}/>
+                            <Image src="/location.png" alt="me" width="25" height="25" onClick={setGeolocationUser}/>
                         </div>
                     </>
                 }
