@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Script from 'next/script'
 import Head from 'next/head'
+import Image from 'next/image'
 import { motion, useCycle } from "framer-motion";
 import { Layers, BaseLayers, GroupLayers } from "../components/map/Layers";
 import { topo, orto, comarques,municipis } from "../components/map/Source";
@@ -10,13 +11,13 @@ import useDeviceDetect, { useDimensions } from "../hooks/customHooks";
 import {NavigationItems} from '../components/menu/NavigationItems'
 import MenuToggle from '../components/menu/MenuToogle'
 import {sidebarTransition} from '../components/constantsTransitions'
-import Image from 'next/image'
-import * as ol from "ol";
 import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/Functions'
 import { useMapContext } from '../store/contexts/MapContextProvider';
 import { SidebarMobile } from "../components/menu/SidebarMobile";
-import Geolocation from 'ol/Geolocation.js';
-import Feature from 'ol/Feature.js';
+
+import * as ol from "ol";
+//import Geolocation from 'ol/Geolocation.js';
+//import Feature from 'ol/Feature.js';
 import Point from 'ol/geom/Point.js';
 import OLVectorLayer from "ol/layer/Vector";
 import { Vector as VectorSource } from 'ol/source';
@@ -52,7 +53,7 @@ export default function HomeMap() {
         projection: setExtension(),
         extent: cataloniaCoord
     });
-    const geolocation = new Geolocation({
+    const geolocation = new ol.Geolocation({
         trackingOptions: {
             enableHighAccuracy: true,
         },
@@ -135,7 +136,7 @@ export default function HomeMap() {
 
   const setGeolocationUser = () => {
 		//example https://openlayers.org/en/latest/examples/geolocation.html
-		const accuracyFeature = new Feature();
+		const accuracyFeature = new ol.Feature();
 
 		geolocationCat.setTracking(true);
 
