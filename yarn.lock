@@ -1641,7 +1641,7 @@
     "@mapbox/mapbox-gl-style-spec" "^13.23.1"
     "mapbox-to-css-font" "^2.4.1"
 
-"ol@^6.4.3":
+"ol@^6.15.1":
   "integrity" "sha512-ZG2CKTpJ8Q+tPywYysVwPk+yevwJzlbwjRKhoCvd7kLVWMbfBl1O/+Kg/yrZZrhG9FNXbFH4GeOZ5yVRqo3P4w=="
   "resolved" "https://registry.npmjs.org/ol/-/ol-6.15.1.tgz"
   "version" "6.15.1"

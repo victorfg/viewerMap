@@ -2,6 +2,9 @@ import { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
 import OLTileLayer from "ol/layer/Tile";
 import LayerGroup from 'ol/layer/Group';
+import OLVectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import {Fill, Stroke, Style} from 'ol/style.js';
 import { baseLayers, layers } from "../Utils/Constants";
 import { useMapContext } from '../../../store/contexts/MapContextProvider';
 
@@ -15,6 +18,19 @@ const BaseLayers = ({ source, title,selectedBaseLayer, selectLayers, opacityLaye
 			source,
             title
 		});
+
+		let a = new VectorSource();
+
+		let caca = new OLVectorLayer({
+			source: new VectorSource(),
+			style: new Style({
+			  stroke: new Stroke({
+				color: 'rgba(255, 255, 255, 0.7)',
+				width: 2,
+			  }),
+			}),
+		});
+
 
 		mapObject.addLayer(tileLayer);
 	}, [mapObject]);

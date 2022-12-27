@@ -67,16 +67,6 @@ export default function HomeMap() {
         },
         projection: cataloniaView.getProjection(),
     });
-    const featureOverlay = new VectorLayer({
-        source: new VectorSource(),
-        map: map,
-        style: new Style({
-          stroke: new Stroke({
-            color: 'rgba(255, 255, 255, 0.7)',
-            width: 2,
-          }),
-        }),
-      });
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
     setMapObject(map);
