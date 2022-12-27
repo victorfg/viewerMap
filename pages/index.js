@@ -224,7 +224,7 @@ export default function HomeMap() {
                             <Image src="/north-rotate.png" alt="me" width="25" height="25" onClick={setNorthPosition}/>
                         </div>
                         <div className="geolocation-user">
-                            <Image src="/location.png" alt="me" width="25" height="25" onClick={setGeolocationUser}/>
+                            <Image src="/location.png" alt="me" width="25" height="25" /*onClick={setGeolocationUser}*//>
                         </div>
                     </>
                 }
