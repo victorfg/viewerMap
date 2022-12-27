@@ -135,7 +135,7 @@ export default function HomeMap() {
     }
   }
 
-  const setGeolocationUser = () => {
+  /*const setGeolocationUser = () => {
 		//example https://openlayers.org/en/latest/examples/geolocation.html
 		geolocationCat.setTracking(true);
   }
@@ -156,7 +156,7 @@ export default function HomeMap() {
 		});
 		
 		mapObject.addLayer(markerPosition); 
-	});
+	});*/
 
   /*geolocationCat?.on('change', function () {
     console.log('accuracy ' + geolocationCat.getAccuracy() + ' [m]');
