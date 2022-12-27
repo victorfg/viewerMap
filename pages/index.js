@@ -2,8 +2,10 @@ import View from 'ol/View.js';
 import Geolocation from 'ol/Geolocation.js';
 import Map from 'ol/Map.js';
 import Point from 'ol/geom/Point.js';
-import {Vector as CacadeLaVaca} from 'ol/layer.js';
 import Feature from 'ol/Feature.js';
+import { Vector as VectorSource } from 'ol/source';
+import OLVectorLayer from "ol/layer/Vector";
+
 import { useState, useRef, useEffect } from "react";
 import Script from 'next/script'
 import Head from 'next/head'
@@ -150,7 +152,15 @@ export default function HomeMap() {
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
         try {
-            let caca = new CacadeLaVaca({})   
+            console.log('vectorSource')
+            var vectorSource = new VectorSource({
+                features: []
+            });
+            console.log('vectorLayer')
+            let vectorLayer = new OLVectorLayer({
+                source: vectorSource
+            });
+
         } catch (error) {
             console.log('caca '+error)
         }
