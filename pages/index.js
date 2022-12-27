@@ -1,7 +1,7 @@
+import VectorLayer from "ol/layer/Vector";
 import { Map, View } from "ol";
 import Geolocation from 'ol/Geolocation.js';
 import Point from 'ol/geom/Point.js';
-import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import Feature from "ol/Feature";
 
