@@ -17,7 +17,7 @@ import { useMapContext } from '../store/contexts/MapContextProvider';
 import { SidebarMobile } from "../components/menu/SidebarMobile";
 import Geolocation from 'ol/Geolocation.js';
 import Feature from 'ol/Feature.js';
-import OLVectorLayer from "ol/layer/Vector";
+import {Vector as VectorLayer} from 'ol/layer.js';
 import Point from 'ol/geom/Point.js';
 import {Vector as VectorSource} from 'ol/source.js';
 
@@ -146,6 +146,8 @@ export default function HomeMap() {
 		geolocationCat.on('change:position', function () {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+
+        let caca = new VectorLayer({})
 
         /*const markerPosition = new OLVectorLayer({
             source: new VectorSource({
