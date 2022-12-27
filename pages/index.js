@@ -137,27 +137,26 @@ export default function HomeMap() {
 
   const setGeolocationUser = () => {
 		//example https://openlayers.org/en/latest/examples/geolocation.html
-		const accuracyFeature = new Feature();
-
 		geolocationCat.setTracking(true);
-
-		geolocationCat.on('change:accuracyGeometry', function () {
-			accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
-		});
-
-		geolocationCat.on('change:position', function () {
-			const coordinates = geolocationCat.getPosition();
-			positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-
-			const markerPosition = new VectorLayerOL({
-				source: new VectorSource({
-					features: [accuracyFeature, positionFeature],
-				}),
-			});
-			
-			mapObject.addLayer(markerPosition); 
-		});
   }
+
+	const accuracyFeature = new Feature();
+	geolocationCat?.on('change:accuracyGeometry', function () {
+		accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
+	});
+
+	geolocationCat?.on('change:position', function () {
+		const coordinates = geolocationCat.getPosition();
+		positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+
+		const markerPosition = new VectorLayerOL({
+			source: new VectorSource({
+				features: [accuracyFeature, positionFeature],
+			}),
+		});
+		
+		mapObject.addLayer(markerPosition); 
+	});
 
   /*geolocationCat?.on('change', function () {
     console.log('accuracy ' + geolocationCat.getAccuracy() + ' [m]');
