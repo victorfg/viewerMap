@@ -79,25 +79,6 @@ export default function HomeMap() {
     }
 	}, [isOpen]);
 
-	useEffect(() => { 
-		geolocationCat?.on('change:accuracyGeometry', function () {
-			accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
-		});
-	
-		geolocationCat?.on('change:position', function () {
-			const coordinates = geolocationCat.getPosition();
-			positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-	
-			const markerPosition = new VectorLayerOL({
-				source: new VectorSource({
-					features: [accuracyFeature, positionFeature],
-				}),
-			});
-			
-			mapObject.addLayer(markerPosition); 
-		});
-	},[geolocationCat]);
-
   const handlerRadioButtonsBaseLayer = (layerSelec) => {
       let newObj = {
           TOPOGRAFIC_MAP: layerSelec == baseLayers.TOPOGRAFIC_MAP,
@@ -158,6 +139,19 @@ export default function HomeMap() {
   const setGeolocationUser = () => {
 		//example https://openlayers.org/en/latest/examples/geolocation.html
 		geolocationCat.setTracking(true);
+		setTimeout(() => {
+			accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
+			const coordinates = geolocationCat.getPosition();
+			positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+	
+			const markerPosition = new VectorLayerOL({
+				source: new VectorSource({
+					features: [accuracyFeature, positionFeature],
+				}),
+			});
+			
+			mapObject.addLayer(markerPosition); 
+		}, 100);
   }
 
 	/*const accuracyFeature = new Feature();
