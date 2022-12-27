@@ -9,14 +9,15 @@ import { Style, Icon } from "ol/style";
 import {get as getProjection} from 'ol/proj';
 import { setProjection_EPSG_25831 } from '../Utils/Functions'
 import Overlay from 'ol/Overlay';
+import { useMapContext } from '../../../store/contexts/MapContextProvider';
 
 const VectorLayerCustom = ({ usersData }) => {
-	setProjection_EPSG_25831();
-	
-	const { map } = useContext(MapContext);
+	const { 
+		mapObject
+	} = useMapContext();
 	
 	useEffect(() => {
-		if (!map) return;
+		if (!mapObject) return;
 
 		const container = document.getElementById('popup');
 		const content = document.getElementById('popup-content');
@@ -49,10 +50,10 @@ const VectorLayerCustom = ({ usersData }) => {
 				overlay.setPosition(coordinate);
 			}
 		  });
-	}, [map]);
+	}, [mapObject]);
 
 	useEffect(() => {
-		if (!map) return;
+		if (!mapObject) return;
 		
 		const projection = getProjection('EPSG:25831');
 
@@ -86,7 +87,7 @@ const VectorLayerCustom = ({ usersData }) => {
 		map.addLayer(vectorLayer) 
 		vectorLayer.setZIndex(400);
 
-	}, [map, usersData]);
+	}, [mapObject, usersData]);
 
 	return null;
 };

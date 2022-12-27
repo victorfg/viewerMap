@@ -1,8 +1,7 @@
 import mapContext from './mapContext';
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import React from 'react';
 import Feature from 'ol/Feature.js';
-import OLVectorLayer from "ol/layer/Vector";
 import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style.js';
 
 const MapContextProvider = ({ children }) => {
@@ -11,7 +10,6 @@ const MapContextProvider = ({ children }) => {
 		const [mapObject, setMapObject] =  useState(null);
     const positionFeature = new Feature();
     const accuracyFeature = new Feature();
-    const caca = new OLVectorLayer({});
 
 		positionFeature.setStyle(
 			new Style({
@@ -36,8 +34,7 @@ const MapContextProvider = ({ children }) => {
       mapObject: mapObject,
 			setViewCatalonia:setViewCatalonia,
       setGeolocationCat:setGeolocationCat,
-			setMapObject:setMapObject,
-      caca:caca
+			setMapObject:setMapObject
     };
   
     return (

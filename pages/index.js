@@ -1,10 +1,9 @@
-import View from 'ol/View.js';
+import { Map, View } from "ol";
 import Geolocation from 'ol/Geolocation.js';
-import Map from 'ol/Map.js';
 import Point from 'ol/geom/Point.js';
-import Feature from 'ol/Feature.js';
-import { Vector as VectorSource } from 'ol/source';
-import OLVectorLayer from "ol/layer/Vector";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import Feature from "ol/Feature";
 
 import { useState, useRef, useEffect } from "react";
 import Script from 'next/script'
@@ -153,11 +152,11 @@ export default function HomeMap() {
 
         try {
             console.log('vectorSource')
-            var vectorSource = new VectorSource({
+            let vectorSource = new VectorSource({
                 features: []
             });
             console.log('vectorLayer')
-
+            let caguen = new VectorLayer({});
         } catch (error) {
             console.log('caca '+error)
         }
@@ -277,7 +276,7 @@ export default function HomeMap() {
                               selectedBaseLayer={selectedBaseLayer}
                           />
                       )}
-                      {/*<VectorLayer usersData={usersData}/>*/}
+                      {/*<VectorLayerCustom />*/}
                   
                   </Layers>
                   {/*<Controls>
