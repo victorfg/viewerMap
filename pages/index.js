@@ -157,9 +157,7 @@ export default function HomeMap() {
                 features: []
             });
             console.log('vectorLayer')
-            let vectorLayer = new OLVectorLayer({
-                source: vectorSource
-            });
+            
 
         } catch (error) {
             console.log('caca '+error)
