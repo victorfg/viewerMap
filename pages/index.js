@@ -4,6 +4,7 @@ import Geolocation from 'ol/Geolocation.js';
 import Point from 'ol/geom/Point.js';
 import VectorSource from "ol/source/Vector";
 import Feature from "ol/Feature";
+import {Fill, Stroke, Style} from 'ol/style.js';
 
 import { useState, useRef, useEffect } from "react";
 import Script from 'next/script'
@@ -55,15 +56,30 @@ export default function HomeMap() {
         projection: setExtension(),
         extent: cataloniaCoord
     });
+    const map = new Map({
+        controls:[],
+        interactions: null, 
+        view: cataloniaView
+    })
     const geolocation = new Geolocation({
         trackingOptions: {
             enableHighAccuracy: true,
         },
         projection: cataloniaView.getProjection(),
     });
+    const featureOverlay = new VectorLayer({
+        source: new VectorSource(),
+        map: map,
+        style: new Style({
+          stroke: new Stroke({
+            color: 'rgba(255, 255, 255, 0.7)',
+            width: 2,
+          }),
+        }),
+      });
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
-    setMapObject(new Map({controls:[],interactions: null, view: cataloniaView}));
+    setMapObject(map);
   }, []);
                                                         
   useEffect(() => { 
