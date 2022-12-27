@@ -33,8 +33,7 @@ export default function HomeMap() {
 		setMapObject, 
 		setViewCatalonia, 
 		setGeolocationCat,
-		positionFeature,
-		accuracyFeature 
+		positionFeature 
 	} = useMapContext();
 
   const [selectedBaseLayer, setSelectedBaseLayer] = useState({ ORTOFOTOMAPA_MAP: true, TOPOGRAFIC_MAP: false });
@@ -138,39 +137,27 @@ export default function HomeMap() {
 
   const setGeolocationUser = () => {
 		//example https://openlayers.org/en/latest/examples/geolocation.html
+		const accuracyFeature = new Feature();
+
 		geolocationCat.setTracking(true);
-		setTimeout(() => {
+
+		geolocationCat.on('change:accuracyGeometry', function () {
 			accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
+		});
+
+		geolocationCat.on('change:position', function () {
 			const coordinates = geolocationCat.getPosition();
 			positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-	
+
 			/*const markerPosition = new VectorLayerOL({
 				source: new VectorSource({
 					features: [accuracyFeature, positionFeature],
 				}),
 			});
 			
-			mapObject.addLayer(markerPosition);*/ 
-		}, 100);
-  }
-
-	/*const accuracyFeature = new Feature();
-	geolocationCat?.on('change:accuracyGeometry', function () {
-		accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
-	});
-
-	geolocationCat?.on('change:position', function () {
-		const coordinates = geolocationCat.getPosition();
-		positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-
-		const markerPosition = new VectorLayerOL({
-			source: new VectorSource({
-				features: [accuracyFeature, positionFeature],
-			}),
+			mapObject.addLayer(markerPosition); */
 		});
-		
-		mapObject.addLayer(markerPosition); 
-	});*/
+  }
 
   /*geolocationCat?.on('change', function () {
     console.log('accuracy ' + geolocationCat.getAccuracy() + ' [m]');
