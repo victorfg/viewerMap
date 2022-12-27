@@ -1,13 +1,13 @@
 
 import Layers from "./Layers";
-import VectorLayer from "./VectorLayer";
+import VectorLayerCustom from "./VectorLayerCustom";
 import TileLayer from "./TileLayer";
 import BaseLayers from "./BaseLayers";
 import GroupLayers from "./GroupLayers";
 
 export {
 	Layers,
-	VectorLayer,
+	VectorLayerCustom,
 	TileLayer,
 	BaseLayers,
 	GroupLayers
