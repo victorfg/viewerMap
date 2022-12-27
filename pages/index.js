@@ -4,9 +4,9 @@ import Head from 'next/head'
 import { motion, useCycle } from "framer-motion";
 import { Layers, BaseLayers, GroupLayers } from "../components/map/Layers";
 import { topo, orto, comarques,municipis } from "../components/map/Source";
-import { baseLayers, layers } from "../components/map/Utils/Constants";
+import { baseLayers, layers, cataloniaCoord } from "../components/map/Utils/Constants";
 import Map from "../components/map/Map";
-import { useDimensions } from "../hooks/customHooks";
+import useDeviceDetect, { useDimensions } from "../hooks/customHooks";
 import {NavigationItems} from '../components/menu/NavigationItems'
 import MenuToggle from '../components/menu/MenuToogle'
 import {sidebarTransition} from '../components/constantsTransitions'
@@ -14,8 +14,6 @@ import Image from 'next/image'
 import * as ol from "ol";
 import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/Functions'
 import { useMapContext } from '../store/contexts/MapContextProvider';
-import { cataloniaCoord } from "../components/map/Utils/Constants";
-import useDeviceDetect from '../hooks/customHooks'
 import { SidebarMobile } from "../components/menu/SidebarMobile";
 import Geolocation from 'ol/Geolocation.js';
 import Feature from 'ol/Feature.js';
@@ -148,8 +146,6 @@ export default function HomeMap() {
 		geolocationCat.on('change:position', function () {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-
-		new OLVectorLayer({});
 
         const markerPosition = new OLVectorLayer({
             source: new VectorSource({
