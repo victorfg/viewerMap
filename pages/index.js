@@ -19,7 +19,6 @@ import useDeviceDetect from '../hooks/customHooks'
 import { SidebarMobile } from "../components/menu/SidebarMobile";
 import Geolocation from 'ol/Geolocation.js';
 import Feature from 'ol/Feature.js';
-import {Vector as VectorSource} from 'ol/source.js';
 import {Vector as VectorLayerOL} from 'ol/layer.js';
 import Point from 'ol/geom/Point.js';
 

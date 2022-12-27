@@ -10,7 +10,7 @@ import {get as getProjection} from 'ol/proj';
 import { setProjection_EPSG_25831 } from '../Utils/Functions'
 import Overlay from 'ol/Overlay';
 
-const VectorLayer = ({ usersData }) => {
+const VectorLayerCustom = ({ usersData }) => {
 	setProjection_EPSG_25831();
 	
 	const { map } = useContext(MapContext);
@@ -91,4 +91,4 @@ const VectorLayer = ({ usersData }) => {
 	return null;
 };
 
-export default VectorLayer;
+export default VectorLayerCustom;
