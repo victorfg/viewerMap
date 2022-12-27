@@ -147,13 +147,13 @@ export default function HomeMap() {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
-        const markerPosition = new OLVectorLayer({
+        /*const markerPosition = new OLVectorLayer({
             source: new VectorSource({
                 features: [accuracyFeature, positionFeature],
             }),
         });
         
-        mapObject.addLayer(markerPosition);
+        mapObject.addLayer(markerPosition);*/
 		});
   }
 
