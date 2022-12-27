@@ -147,7 +147,7 @@ export default function HomeMap() {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
-        let caca = new VectorLayer({})
+        //let caca = new VectorLayer({})
 
         /*const markerPosition = new OLVectorLayer({
             source: new VectorSource({
