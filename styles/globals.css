@@ -126,20 +126,26 @@ a {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 650px) {
-  .north-rotate{
-    position: absolute;
-    bottom: 20vh;
-    right: 15px;
-    color: black;
-    background-color: white;
-    border-radius: 50%;
-    padding: 2px;
-    z-index: 1;
-  }
+.north-rotate-map{
+  position: absolute;
+  bottom: 20vh;
+  right: 5vw;
+  color: black;
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
+  z-index: 1;
+  display: flex;
 }
-@media only screen and (min-width: 650px) {
-  .north-rotate{
-    display: none;
-  }
+
+.geolocation-user{
+  position: absolute;
+  bottom: 20vh;
+  right: 20vw;
+  color: black;
+  background-color: white;
+  border-radius: 100%;
+  padding: 5px;
+  z-index: 1;
+  display: flex;
 }

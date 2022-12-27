@@ -168,8 +168,11 @@ export default function HomeMap() {
                                 setShowSidebar={setShowSidebar}
                             />
                         </div>
-                        <div className="north-rotate">
+                        <div className="north-rotate-map">
                             <Image src="/north-rotate.png" alt="me" width="25" height="25" onClick={setNorthPosition}/>
+                        </div>
+                        <div className="geolocation-user">
+                            <Image src="/location.png" alt="me" width="25" height="25" onClick={setNorthPosition}/>
                         </div>
                     </>
                 }
