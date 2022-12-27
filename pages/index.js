@@ -1,3 +1,6 @@
+import View from 'ol/View.js';
+import Geolocation from 'ol/Geolocation.js';
+import Map from 'ol/Map.js';
 import { useState, useRef, useEffect } from "react";
 import Script from 'next/script'
 import Head from 'next/head'
@@ -6,7 +9,7 @@ import { motion, useCycle } from "framer-motion";
 import { Layers, BaseLayers, GroupLayers } from "../components/map/Layers";
 import { topo, orto, comarques,municipis } from "../components/map/Source";
 import { baseLayers, layers, cataloniaCoord } from "../components/map/Utils/Constants";
-import Map from "../components/map/Map";
+import MapCustom from "../components/map/Map";
 import useDeviceDetect, { useDimensions } from "../hooks/customHooks";
 import {NavigationItems} from '../components/menu/NavigationItems'
 import MenuToggle from '../components/menu/MenuToogle'
@@ -15,7 +18,7 @@ import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/
 import { useMapContext } from '../store/contexts/MapContextProvider';
 import { SidebarMobile } from "../components/menu/SidebarMobile";
 
-import * as ol from "ol";
+//import * as ol from "ol";
 //import Geolocation from 'ol/Geolocation.js';
 //import Feature from 'ol/Feature.js';
 import Point from 'ol/geom/Point.js';
@@ -47,13 +50,13 @@ export default function HomeMap() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
-    const cataloniaView = new ol.View({
+    const cataloniaView = new View({
         center: [396905,4618292],
         zoom: 3,
         projection: setExtension(),
         extent: cataloniaCoord
     });
-    const geolocation = new ol.Geolocation({
+    const geolocation = new Geolocation({
         trackingOptions: {
             enableHighAccuracy: true,
         },
@@ -61,7 +64,7 @@ export default function HomeMap() {
     });
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
-    setMapObject(new ol.Map({controls:[],interactions: null, view: cataloniaView}));
+    setMapObject(new Map({controls:[],interactions: null, view: cataloniaView}));
   }, []);
                                                         
   useEffect(() => { 
@@ -229,7 +232,7 @@ export default function HomeMap() {
                         </div>
                     </>
                 }
-              <Map>
+              <MapCustom>
                   <Layers>
                       {selectedBaseLayer.TOPOGRAFIC_MAP && (
                           <BaseLayers
@@ -271,7 +274,7 @@ export default function HomeMap() {
                   {/*<Controls>
                       <FullScreenControl />
                   </Controls>*/}
-              </Map>
+              </MapCustom>
           </div>
       </>
   )

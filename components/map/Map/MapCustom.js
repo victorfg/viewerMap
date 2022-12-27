@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react"
 import { useMapContext } from '../../../store/contexts/MapContextProvider';
 
-const Map = ({ children }) => {
+const MapCustom = ({ children }) => {
 	const mapRef = useRef();
 	const { mapObject } = useMapContext();
 
@@ -18,4 +18,4 @@ const Map = ({ children }) => {
 	)
 }
 
-export default Map;
+export default MapCustom;
