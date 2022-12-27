@@ -1,6 +1,9 @@
 import View from 'ol/View.js';
 import Geolocation from 'ol/Geolocation.js';
 import Map from 'ol/Map.js';
+import Point from 'ol/geom/Point.js';
+import {Tile as TileLayer, Vector as CacadeLaVaca} from 'ol/layer.js';
+import Feature from 'ol/Feature.js';
 import { useState, useRef, useEffect } from "react";
 import Script from 'next/script'
 import Head from 'next/head'
@@ -20,9 +23,6 @@ import { SidebarMobile } from "../components/menu/SidebarMobile";
 
 //import * as ol from "ol";
 //import Geolocation from 'ol/Geolocation.js';
-//import Feature from 'ol/Feature.js';
-import Point from 'ol/geom/Point.js';
-import OLVectorLayer from "ol/layer/Vector";
 import { Vector as VectorSource } from 'ol/source';
 
 
@@ -139,7 +139,7 @@ export default function HomeMap() {
 
   const setGeolocationUser = () => {
 		//example https://openlayers.org/en/latest/examples/geolocation.html
-		const accuracyFeature = new ol.Feature();
+		const accuracyFeature = new Feature();
 
 		geolocationCat.setTracking(true);
 
@@ -151,7 +151,7 @@ export default function HomeMap() {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
-        let caca = new OLVectorLayer({})
+        let caca = new CacadeLaVaca({})
 
         /*const markerPosition = new OLVectorLayer({
             source: new VectorSource({
