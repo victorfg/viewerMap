@@ -152,7 +152,7 @@ export default function HomeMap() {
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
         try {
-            let caca = new CacadeLaVaca({})   
+            let caca; 
         } catch (error) {
             console.log('caca '+error)
         }
