@@ -65,6 +65,16 @@ export default function HomeMap() {
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
     setMapObject(new Map({controls:[],interactions: null, view: cataloniaView}));
+
+    console.log('vectorSource')
+    var vectorSource = new VectorSource({
+        features: []
+    });
+    console.log('vectorLayer')
+    let vectorLayer = new OLVectorLayer({
+        source: vectorSource
+    });
+
   }, []);
                                                         
   useEffect(() => { 
@@ -152,11 +162,6 @@ export default function HomeMap() {
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
         try {
-            console.log('vectorSource')
-            var vectorSource = new VectorSource({
-                features: []
-            });
-            console.log('vectorLayer')
             
 
         } catch (error) {
