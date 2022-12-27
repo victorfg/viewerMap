@@ -2,7 +2,7 @@ import View from 'ol/View.js';
 import Geolocation from 'ol/Geolocation.js';
 import Map from 'ol/Map.js';
 import Point from 'ol/geom/Point.js';
-import {Tile as TileLayer, Vector as CacadeLaVaca} from 'ol/layer.js';
+import {Vector as CacadeLaVaca} from 'ol/layer.js';
 import Feature from 'ol/Feature.js';
 import { useState, useRef, useEffect } from "react";
 import Script from 'next/script'
@@ -20,10 +20,8 @@ import {sidebarTransition} from '../components/constantsTransitions'
 import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/Functions'
 import { useMapContext } from '../store/contexts/MapContextProvider';
 import { SidebarMobile } from "../components/menu/SidebarMobile";
-
 //import * as ol from "ol";
 //import Geolocation from 'ol/Geolocation.js';
-import { Vector as VectorSource } from 'ol/source';
 
 
 export default function HomeMap() {
@@ -152,7 +150,7 @@ export default function HomeMap() {
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
         try {
-            let caca; 
+            let caca = new CacadeLaVaca({})   
         } catch (error) {
             console.log('caca '+error)
         }

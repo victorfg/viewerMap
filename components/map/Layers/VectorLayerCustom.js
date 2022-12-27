@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
-import OLVectorLayer from "ol/layer/Vector";
+//import OLVectorLayer from "ol/layer/Vector";
 import { fromLonLat } from "ol/proj";
 import { Point } from "ol/geom";
 import Feature from "ol/Feature";
-import { Vector as VectorSource } from 'ol/source';
+//import { Vector as VectorSource } from 'ol/source';
 import { Style, Icon } from "ol/style";
 import {get as getProjection} from 'ol/proj';
 import { setProjection_EPSG_25831 } from '../Utils/Functions'
