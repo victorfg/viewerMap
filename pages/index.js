@@ -151,7 +151,7 @@ export default function HomeMap() {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
-        let caca = new CacadeLaVaca({})
+        //let caca = new CacadeLaVaca({})
 
         /*const markerPosition = new OLVectorLayer({
             source: new VectorSource({
