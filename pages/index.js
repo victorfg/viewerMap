@@ -17,7 +17,7 @@ import { useMapContext } from '../store/contexts/MapContextProvider';
 import { SidebarMobile } from "../components/menu/SidebarMobile";
 import Geolocation from 'ol/Geolocation.js';
 import Feature from 'ol/Feature.js';
-import {Vector as VectorLayer} from 'ol/layer.js';
+import VectorLayer from 'ol/layer/Vector.js';
 import Point from 'ol/geom/Point.js';
 import {Vector as VectorSource} from 'ol/source.js';
 
