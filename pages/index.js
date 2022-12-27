@@ -33,7 +33,8 @@ export default function HomeMap() {
 		setMapObject, 
 		setViewCatalonia, 
 		setGeolocationCat,
-		positionFeature 
+		positionFeature,
+		accuracyFeature 
 	} = useMapContext();
 
   const [selectedBaseLayer, setSelectedBaseLayer] = useState({ ORTOFOTOMAPA_MAP: true, TOPOGRAFIC_MAP: false });
@@ -77,6 +78,25 @@ export default function HomeMap() {
       }, 800);
     }
 	}, [isOpen]);
+
+	useEffect(() => { 
+		geolocationCat?.on('change:accuracyGeometry', function () {
+			accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
+		});
+	
+		geolocationCat?.on('change:position', function () {
+			const coordinates = geolocationCat.getPosition();
+			positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+	
+			const markerPosition = new VectorLayerOL({
+				source: new VectorSource({
+					features: [accuracyFeature, positionFeature],
+				}),
+			});
+			
+			mapObject.addLayer(markerPosition); 
+		});
+	},[geolocationCat]);
 
   const handlerRadioButtonsBaseLayer = (layerSelec) => {
       let newObj = {
@@ -135,12 +155,12 @@ export default function HomeMap() {
     }
   }
 
-  /*const setGeolocationUser = () => {
+  const setGeolocationUser = () => {
 		//example https://openlayers.org/en/latest/examples/geolocation.html
 		geolocationCat.setTracking(true);
   }
 
-	const accuracyFeature = new Feature();
+	/*const accuracyFeature = new Feature();
 	geolocationCat?.on('change:accuracyGeometry', function () {
 		accuracyFeature.setGeometry(geolocationCat.getAccuracyGeometry());
 	});
@@ -223,7 +243,7 @@ export default function HomeMap() {
                             <Image src="/north-rotate.png" alt="me" width="25" height="25" onClick={setNorthPosition}/>
                         </div>
                         <div className="geolocation-user">
-                            <Image src="/location.png" alt="me" width="25" height="25" /*onClick={setGeolocationUser}*//>
+                            <Image src="/location.png" alt="me" width="25" height="25" onClick={setGeolocationUser}/>
                         </div>
                     </>
                 }

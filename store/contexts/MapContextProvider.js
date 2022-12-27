@@ -9,6 +9,7 @@ const MapContextProvider = ({ children }) => {
     const [geolocationCat, setGeolocationCat] = useState(null);
 		const [mapObject, setMapObject] =  useState(null);
     const positionFeature = new Feature();
+    const accuracyFeature = new Feature();
 
 		positionFeature.setStyle(
 			new Style({
@@ -26,6 +27,7 @@ const MapContextProvider = ({ children }) => {
 		);
   
     const mapCtx = {
+      accuracyFeature:accuracyFeature,
       positionFeature:positionFeature,
       viewCatalonia: viewCatalonia,
       geolocationCat: geolocationCat,
