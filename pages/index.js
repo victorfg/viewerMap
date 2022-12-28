@@ -144,7 +144,7 @@ export default function HomeMap() {
 
   const setGeolocationUser = () => {
 		//example https://openlayers.org/en/latest/examples/geolocation.html
-		/*const accuracyFeature = new Feature();
+		const accuracyFeature = new Feature();
 
 		geolocationCat.setTracking(true);
 
@@ -156,25 +156,14 @@ export default function HomeMap() {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
-        try {
-            console.log('vectorSource')
-            let vectorSource = new VectorSource({
-                features: []
-            });
-            console.log('vectorLayer')
-            //let caguen = new VectorLayer({});
-        } catch (error) {
-            console.log('caca '+error)
-        }
-
-        const markerPosition = new OLVectorLayer({
+        const markerPosition = new VectorLayer({
             source: new VectorSource({
                 features: [accuracyFeature, positionFeature],
             }),
         });
         
-        //mapObject.addLayer(markerPosition);
-		});*/
+        mapObject.addLayer(markerPosition);
+		});
   }
 
   /*geolocationCat?.on('change', function () {
