@@ -248,7 +248,24 @@ export default function HomeMap() {
             }
             <MapCustom>
                 <Layers>
-                    
+                    {selectedBaseLayer.TOPOGRAFIC_MAP && (
+                        <BaseLayers
+                            source={topo()}
+                            title={baseLayers.TOPOGRAFIC_MAP}
+                            selectLayers={selectLayers}
+                            selectedBaseLayer={selectedBaseLayer}
+                            opacityLayer={opacityLayer} 
+                        />
+                    )}
+                    {selectedBaseLayer.ORTOFOTOMAPA_MAP && (
+                        <BaseLayers
+                            source={orto()}
+                            title={baseLayers.ORTOFOTOMAPA_MAP}
+                            selectLayers={selectLayers}
+                            selectedBaseLayer={selectedBaseLayer}
+                            opacityLayer={opacityLayer} 
+                        />
+                    )}
                     
                     {selectLayers.COMARQUES_LAYER && (
                         <GroupLayers

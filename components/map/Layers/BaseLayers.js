@@ -19,19 +19,6 @@ const BaseLayers = ({ source, title,selectedBaseLayer, selectLayers, opacityLaye
             title
 		});
 
-		let a = new VectorSource();
-
-		let caca = new OLVectorLayer({
-			source: new VectorSource(),
-			style: new Style({
-			  stroke: new Stroke({
-				color: 'rgba(255, 255, 255, 0.7)',
-				width: 2,
-			  }),
-			}),
-		});
-
-
 		mapObject.addLayer(tileLayer);
 	}, [mapObject]);
 
