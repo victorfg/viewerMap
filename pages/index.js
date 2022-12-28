@@ -72,9 +72,9 @@ export default function HomeMap() {
         features: []
     });
 
-    let vectorLayer = new OLVectorLayer({
+    /*let vectorLayer = new OLVectorLayer({
         source: test
-    });
+    });*/
     
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
