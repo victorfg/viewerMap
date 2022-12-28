@@ -5,6 +5,7 @@ import Point from 'ol/geom/Point.js';
 import Feature from "ol/Feature";
 import OLVectorLayer from "ol/layer/Vector";
 import { Vector as VectorSource } from 'ol/source';
+import VectorLayer from 'ol/layer/Vector.js';
 import {Fill, Stroke, Style} from 'ol/style.js';
 
 import { useState, useRef, useEffect } from "react";
@@ -72,9 +73,9 @@ export default function HomeMap() {
         features: []
     });
 
-    /*let vectorLayer = new OLVectorLayer({
+    let vectorLayer = new VectorLayer({
         source: test
-    });*/
+    });
     
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
