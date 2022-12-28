@@ -5,7 +5,7 @@ import { motion, useCycle } from "framer-motion";
 import { Layers, BaseLayers, GroupLayers } from "../components/map/Layers";
 import { topo, orto, comarques,municipis } from "../components/map/Source";
 import { baseLayers, layers, cataloniaCoord } from "../components/map/Utils/Constants";
-import MapCustom from "../components/map/Map";
+import MapCustom from "../components/map/Map/MapCustom";
 import useDeviceDetect, { useDimensions } from "../hooks/customHooks";
 import {NavigationItems} from '../components/menu/NavigationItems'
 import MenuToggle from '../components/menu/MenuToogle'

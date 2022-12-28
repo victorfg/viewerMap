@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import MapContext from "../Map/MapContext";
 import OLTileLayer from "ol/layer/Tile";
 import LayerGroup from 'ol/layer/Group';
 import OLVectorLayer from "ol/layer/Vector";

@@ -1,27 +1,26 @@
 import { useContext, useEffect } from "react";
-import MapContext from "../Map/MapContext";
 import OLTileLayer from "ol/layer/Tile";
+import { useMapContext } from '../../../store/contexts/MapContextProvider';
 
 const TileLayer = ({ source, zIndex = 0 }) => {
-	const { map } = useContext(MapContext);
-
+	const { mapObject } = useMapContext();
 	useEffect(() => {
-		if (!map) return;
+		if (!mapObject) return;
 
 		let tileLayer = new OLTileLayer({
 			source,
 			zIndex,
 		});
 
-		map.addLayer(tileLayer);
+		mapObject.addLayer(tileLayer);
 		tileLayer.setZIndex(zIndex);
 
 		return () => {
-			if (map) {
-				map.removeLayer(tileLayer);
+			if (mapObject) {
+				mapObject.removeLayer(tileLayer);
 			}
 		};
-	}, [map]);
+	}, [mapObject]);
 
 	return null;
 };

@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import MapContext from "../Map/MapContext";
 //import OLVectorLayer from "ol/layer/Vector";
 import { fromLonLat } from "ol/proj";
 import { Point } from "ol/geom";
