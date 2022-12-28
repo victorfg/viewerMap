@@ -1,15 +1,4 @@
-import Map from 'ol/Map.js';
-import View from 'ol/View.js';
-import Geolocation from 'ol/Geolocation.js';
-import Point from 'ol/geom/Point.js';
-import Feature from "ol/Feature";
-import OLVectorLayer from "ol/layer/Vector";
-import { Vector as VectorSource } from 'ol/source';
-import VectorLayer from 'ol/layer/Vector.js';
-import {Fill, Stroke, Style} from 'ol/style.js';
-
 import { useState, useRef, useEffect } from "react";
-import Script from 'next/script'
 import Head from 'next/head'
 import Image from 'next/image'
 import { motion, useCycle } from "framer-motion";
@@ -24,8 +13,15 @@ import {sidebarTransition} from '../components/constantsTransitions'
 import { setProjection_EPSG_25831, setExtension } from '../components/map/Utils/Functions'
 import { useMapContext } from '../store/contexts/MapContextProvider';
 import { SidebarMobile } from "../components/menu/SidebarMobile";
-//import * as ol from "ol";
-//import Geolocation from 'ol/Geolocation.js';
+
+import Map from 'ol/Map.js';
+import View from 'ol/View.js';
+import Geolocation from 'ol/Geolocation.js';
+import Point from 'ol/geom/Point.js';
+import Feature from "ol/Feature";
+import { Vector as VectorSource } from 'ol/source';
+import {Fill, Stroke, Style} from 'ol/style.js';
+import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer.js';
 
 
 export default function HomeMap() {
