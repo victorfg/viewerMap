@@ -68,10 +68,12 @@ export default function HomeMap() {
         },
         projection: cataloniaView.getProjection(),
     });
+    const test = new VectorLayer();
+    
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
     setMapObject(map);
-    setMarkePoristion(new VectorLayer());
+    setMarkePoristion(test);
   }, []);
                                                         
   useEffect(() => { 
