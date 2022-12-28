@@ -246,7 +246,9 @@ export default function HomeMap() {
                     </div>
                 </>
             }
-           
+            <MapCustom>
+               <div>caca</div>
+            </MapCustom>
         </div>
       </>
   )
