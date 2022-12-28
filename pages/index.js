@@ -71,7 +71,7 @@ export default function HomeMap() {
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
     setMapObject(map);
-    setMarkePoristion('caca');
+    setMarkePoristion(new VectorLayer({}));
   }, []);
                                                         
   useEffect(() => { 
