@@ -36,7 +36,8 @@ export default function HomeMap() {
 		setMapObject, 
 		setViewCatalonia, 
 		setGeolocationCat,
-		positionFeature 
+		positionFeature,
+        setMarkePoristion 
 	} = useMapContext();
 
   const [selectedBaseLayer, setSelectedBaseLayer] = useState({ ORTOFOTOMAPA_MAP: true, TOPOGRAFIC_MAP: false });
@@ -70,6 +71,7 @@ export default function HomeMap() {
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
     setMapObject(map);
+    setMarkePoristion('caca');
   }, []);
                                                         
   useEffect(() => { 

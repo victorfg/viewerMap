@@ -9,9 +9,9 @@ const MapContextProvider = ({ children }) => {
     const [viewCatalonia, setViewCatalonia] = useState(null);
     const [geolocationCat, setGeolocationCat] = useState(null);
 		const [mapObject, setMapObject] =  useState(null);
+    const [markerPosition, setMarkePoristion] = useState(null);
     const positionFeature = new Feature();
     const accuracyFeature = new Feature();
-    const markerPosition = new VectorLayer({});
 
 		positionFeature.setStyle(
 			new Style({
@@ -37,7 +37,8 @@ const MapContextProvider = ({ children }) => {
       mapObject: mapObject,
 			setViewCatalonia:setViewCatalonia,
       setGeolocationCat:setGeolocationCat,
-			setMapObject:setMapObject
+			setMapObject:setMapObject,
+      setMarkePoristion:setMarkePoristion
     };
   
     return (
