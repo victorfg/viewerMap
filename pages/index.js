@@ -59,8 +59,7 @@ export default function HomeMap() {
     });
     const map = new Map({
         view: cataloniaView,
-        controls:[],
-        interactions: []
+        controls:[]
     })
     const geolocation = new Geolocation({
         trackingOptions: {
@@ -157,13 +156,13 @@ export default function HomeMap() {
         const coordinates = geolocationCat.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
 
-        /*const markerPosition = new VectorLayer({
+        const markerPosition = new VectorLayer({
             source: new VectorSource({
                 features: [accuracyFeature, positionFeature],
             }),
-        });*/
+        });
         
-        //mapObject.addLayer(markerPosition);
+        mapObject.addLayer(markerPosition);
 		});
   }
 
