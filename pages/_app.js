@@ -7,11 +7,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></Script>
-      <ErrorBoundary>
+
         <MapContextProvider>
-          <Component {...pageProps} />
+        <ErrorBoundary>
+        <Component {...pageProps} />
+        </ErrorBoundary>
         </MapContextProvider>
-      </ErrorBoundary>
+
     </>
   ) 
 }
