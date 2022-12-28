@@ -195,7 +195,7 @@ export default function HomeMap() {
             <title>My Map</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         </Head>
-        <Script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></Script>
+
           <div id="map" className="map" onClick={onClickMap}>
               {/*<div id="popup" className="ol-popup">
                   <a href="#" id="popup-closer" className="ol-popup-closer"></a>
