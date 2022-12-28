@@ -44,7 +44,7 @@ export default function HomeMap() {
 
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
-  //const { height } = useDimensions(containerRef);
+  const { height } = useDimensions(containerRef);
 
   const { isMobile } = useDeviceDetect();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -201,50 +201,52 @@ export default function HomeMap() {
                 <a href="#" id="popup-closer" className="ol-popup-closer"></a>
                 <div id="popup-content"></div>
             </div>*/}
-            
-            <MapCustom>
-                <Layers>
-                    {selectedBaseLayer.TOPOGRAFIC_MAP && (
-                        <BaseLayers
-                            source={topo()}
-                            title={baseLayers.TOPOGRAFIC_MAP}
+            {!isMobile && 
+                <>
+                    <motion.nav
+                            className={`menu ${isOpen ? 'z-10' : ''}`}
+                            initial={false}
+                            animate={isOpen ? "open" : "closed"}
+                            custom={height}
+                            ref={containerRef} 
+                    >
+                            <motion.div className={`background ${isOpen ? 'rounded-3xl' : ''}`} variants={sidebarTransition} />
+                            <NavigationItems 
+                                handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
+                                handlerOpacityLayer={handlerOpacityLayer}
+                                handlerCheckButtonsLayers={handlerCheckButtonsLayers}
+                                selectedBaseLayer={selectedBaseLayer}
+                                selectLayers={selectLayers}
+                            />
+                            <MenuToggle toggle={() => toggleOpen()} />          
+                    </motion.nav>
+                    <div className="general-zoom">
+                        <Image src="/zoomGeneral.png" alt="me" width="40" height="40" onClick={setGeneralZoom} />
+                    </div>
+                </>
+            }
+            {isMobile &&
+                <>
+                    <div className="main-menu-mobile ">
+                        <SidebarMobile 
+                            handlerRadioButtonsBaseLayer={handlerRadioButtonsBaseLayer}
+                            handlerOpacityLayer={handlerOpacityLayer}
+                            handlerCheckButtonsLayers={handlerCheckButtonsLayers}
+                            selectedBaseLayer={selectedBaseLayer}
                             selectLayers={selectLayers}
-                            selectedBaseLayer={selectedBaseLayer}
-                            opacityLayer={opacityLayer} 
+                            showSidebar={showSidebar}
+                            setShowSidebar={setShowSidebar}
                         />
-                    )}
-                    {selectedBaseLayer.ORTOFOTOMAPA_MAP && (
-                        <BaseLayers
-                            source={orto()}
-                            title={baseLayers.ORTOFOTOMAPA_MAP}
-                            selectLayers={selectLayers}
-                            selectedBaseLayer={selectedBaseLayer}
-                            opacityLayer={opacityLayer} 
-                        />
-                    )}
-                    
-                    {selectLayers.COMARQUES_LAYER && (
-                        <GroupLayers
-                            source={comarques()}
-                            title={layers.COMARQUES_LAYER}
-                            selectedBaseLayer={selectedBaseLayer}
-                        />
-                    )}
-
-                    {selectLayers.MUNICIPIS_LAYER && (
-                        <GroupLayers
-                            source={municipis()}
-                            title={layers.MUNICIPIS_LAYER}
-                            selectedBaseLayer={selectedBaseLayer}
-                        />
-                    )}
-                    {/*<VectorLayerCustom />*/}
-                
-                </Layers>
-                {/*<Controls>
-                    <FullScreenControl />
-                </Controls>*/}
-            </MapCustom>
+                    </div>
+                    <div className="north-rotate-map">
+                        <Image src="/north-rotate.png" alt="me" width="25" height="25" onClick={setNorthPosition}/>
+                    </div>
+                    <div className="geolocation-user">
+                        <Image src="/location.png" alt="me" width="25" height="25" onClick={setGeolocationUser}/>
+                    </div>
+                </>
+            }
+           
         </div>
       </>
   )
