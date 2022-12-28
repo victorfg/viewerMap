@@ -1,10 +1,9 @@
-import VectorLayer from "ol/layer/Vector";
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
 import Geolocation from 'ol/Geolocation.js';
 import Point from 'ol/geom/Point.js';
-import VectorSource from "ol/source/Vector";
 import Feature from "ol/Feature";
+import { Vector as VectorSource } from 'ol/source';
 import {Fill, Stroke, Style} from 'ol/style.js';
 
 import { useState, useRef, useEffect } from "react";
@@ -68,7 +67,9 @@ export default function HomeMap() {
         },
         projection: cataloniaView.getProjection(),
     });
-    const test = new VectorLayer();
+    const test = new VectorSource({
+        features: []
+    });
     
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
