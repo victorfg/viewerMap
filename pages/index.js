@@ -1,5 +1,6 @@
 import VectorLayer from "ol/layer/Vector";
-import { Map, View } from "ol";
+import Map from 'ol/Map.js';
+import View from 'ol/View.js';
 import Geolocation from 'ol/Geolocation.js';
 import Point from 'ol/geom/Point.js';
 import VectorSource from "ol/source/Vector";
@@ -57,9 +58,9 @@ export default function HomeMap() {
         extent: cataloniaCoord
     });
     const map = new Map({
+        view: cataloniaView,
         controls:[],
-        interactions: null, 
-        view: cataloniaView
+        interactions: []
     })
     const geolocation = new Geolocation({
         trackingOptions: {
