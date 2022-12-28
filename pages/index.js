@@ -3,6 +3,7 @@ import View from 'ol/View.js';
 import Geolocation from 'ol/Geolocation.js';
 import Point from 'ol/geom/Point.js';
 import Feature from "ol/Feature";
+import OLVectorLayer from "ol/layer/Vector";
 import { Vector as VectorSource } from 'ol/source';
 import {Fill, Stroke, Style} from 'ol/style.js';
 
@@ -69,6 +70,10 @@ export default function HomeMap() {
     });
     const test = new VectorSource({
         features: []
+    });
+
+    let vectorLayer = new OLVectorLayer({
+        source: test
     });
     
     setViewCatalonia(cataloniaView); 
