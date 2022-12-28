@@ -17,6 +17,7 @@ const MenuComponent = (props) => {
                     className="cursor-pointer"
                     layerName="ICC Topo"
                     onChangeRange={event => props.handlerOpacityLayer(event.target)}
+                    readOnly
                 />
             </div>
             <div className= {`flex items-center ${isMobile ? ' mt-5 text-lg' : ' mt-1'}`}  >
@@ -29,6 +30,7 @@ const MenuComponent = (props) => {
                     className="cursor-pointer"
                     layerName="ICC Orto"
                     onChangeRange={event => props.handlerOpacityLayer(event.target)}
+                    readOnly
                 />
             </div>
             <div className= {`flex items-center ${isMobile ? ' mt-5 text-lg' : ' mt-1'}`}  >
@@ -42,6 +44,7 @@ const MenuComponent = (props) => {
                     id="comarques"
                     onChangeRange={event => props.handlerOpacityLayer(event.target)}
                     checked={props.selectLayers.COMARQUES_LAYER}
+                    readOnly
                 />
             </div>
             <div className= {`flex items-center ${isMobile ? ' mt-5 text-lg' : ' mt-1'}`}  >
@@ -55,6 +58,7 @@ const MenuComponent = (props) => {
                     id="municipis"
                     onChangeRange={event => props.handlerOpacityLayer(event.target)}
                     checked={props.selectLayers.MUNICIPIS_LAYER}
+                    readOnly
                 />
                 
             </div>

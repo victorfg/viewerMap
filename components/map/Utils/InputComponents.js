@@ -9,7 +9,6 @@ const InputLayerSelectorAndOpacity = (props) => {
                 <input 
                     type={props.type}
                     name={props.name}
-                    defaultValue={props.defaultValue}
                     checked={props.checked}
                     //onChange={(ev) => props.onChange(ev.target)}
                     className={props.className}
@@ -17,9 +16,10 @@ const InputLayerSelectorAndOpacity = (props) => {
                     id={props.id}
                     disabled={props.disabled}
                     value={props.defaultValue}
+                    readOnly
                 >
                 </input>
-                <label className="label-layer-name cursor-pointer" for={props.defaultValue}>{props.layerName}</label>
+                <label className="label-layer-name cursor-pointer" htmlFor={props.defaultValue}>{props.layerName}</label>
                 {!disabledRangeOpacity && 
                     <input 
                         defaultValue="1" 
