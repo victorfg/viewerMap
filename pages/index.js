@@ -158,9 +158,9 @@ export default function HomeMap() {
 
         try {
             console.log('vectorSource')
-            let vectorSource = new VectorSource({
+            /*let vectorSource = new VectorSource({
                 features: []
-            });
+            });*/
             console.log('vectorLayer')
             //let caguen = new VectorLayer({});
         } catch (error) {
