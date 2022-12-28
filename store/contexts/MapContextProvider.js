@@ -2,7 +2,6 @@ import mapContext from './mapContext';
 import { useState } from "react";
 import React from 'react';
 import Feature from 'ol/Feature.js';
-import VectorLayer from "ol/layer/Vector";
 import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style.js';
 
 const MapContextProvider = ({ children }) => {

@@ -65,13 +65,31 @@ export default function HomeMap() {
         },
         projection: cataloniaView.getProjection(),
     });
+    let styles = {
+        'MultiPolygon': new Style({
+          stroke: new Stroke({
+            color: 'blue',
+            width: 1,
+          }),
+          fill: new Fill({
+            color: 'rgba(0, 0, 255, 0.1)',
+          }),
+        }),
+    };
     const test = new VectorSource({
         features: []
     });
 
-    let vectorLayer = new VectorLayer({
-        source: test
-    });
+    const featureOverlay = new VectorLayer({
+        source: new VectorSource(),
+        map: map,
+        style: new Style({
+          stroke: new Stroke({
+            color: 'rgba(255, 255, 255, 0.7)',
+            width: 2,
+          }),
+        }),
+      });
     
     setViewCatalonia(cataloniaView); 
     setGeolocationCat(geolocation); 
