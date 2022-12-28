@@ -247,7 +247,13 @@ export default function HomeMap() {
                 </>
             }
             <MapCustom>
-               <div>caca</div>
+                <Layers>
+                    <div>caca</div>
+                
+                </Layers>
+                {/*<Controls>
+                    <FullScreenControl />
+                </Controls>*/}
             </MapCustom>
         </div>
       </>
