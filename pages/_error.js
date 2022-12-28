@@ -3,7 +3,7 @@ function Error({ statusCode }) {
       <div>
         {statusCode
           ? `An error ${statusCode} occurred on server`
-          : `An error occurred on client ${statusCode}`}
+          : 'An error occurred on client'}
       </div>
     )
   }
