@@ -82,7 +82,6 @@ export default function HomeMap() {
 
     const featureOverlay = new VectorLayer({
         source: new VectorSource(),
-        map: map,
         style: new Style({
           stroke: new Stroke({
             color: 'rgba(255, 255, 255, 0.7)',
@@ -296,7 +295,6 @@ export default function HomeMap() {
                             selectedBaseLayer={selectedBaseLayer}
                         />
                     )}
-                    {/*<VectorLayerCustom />*/}
                 
                 </Layers>
                 {/*<Controls>
